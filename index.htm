@@ -1,0 +1,1138 @@
+﻿<!DOCTYPE html>
+<html class="no-js" lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Gallery &#8211; Modern</title>
+<meta name='robots' content='noindex, nofollow'>
+<link rel='dns-prefetch' href='//fonts.googleapis.com'>
+<link rel='dns-prefetch' href='../../index.htm'>
+<link rel='preconnect' href='https://fonts.gstatic.com' crossorigin="">
+<link rel="alternate" type="application/rss+xml" title="Modern &raquo; Feed" href="../feed/index.htm.rss">
+<link rel="alternate" type="text/calendar" title="Modern &raquo; iCal Feed" href="../events/modern-d41d8cd98f0.ics?ical=1">
+<script type="text/javascript">
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/svg\/","svgExt":".svg","source":{"wpemoji":"http:\/\/ed.aislinthemes.com\/modern\/wp-includes\/js\/wp-emoji.js?ver=6.0","twemoji":"http:\/\/ed.aislinthemes.com\/modern\/wp-includes\/js\/twemoji.js?ver=6.0"}};
+/**
+ * @output wp-includes/js/wp-emoji-loader.js
+ */
+
+( function( window, document, settings ) {
+	var src, ready, ii, tests;
+
+	// Create a canvas element for testing native browser support of emoji.
+	var canvas = document.createElement( 'canvas' );
+	var context = canvas.getContext && canvas.getContext( '2d' );
+
+	/**
+	 * Checks if two sets of Emoji characters render the same visually.
+	 *
+	 * @since 4.9.0
+	 *
+	 * @private
+	 *
+	 * @param {number[]} set1 Set of Emoji character codes.
+	 * @param {number[]} set2 Set of Emoji character codes.
+	 *
+	 * @return {boolean} True if the two sets render the same.
+	 */
+	function emojiSetsRenderIdentically( set1, set2 ) {
+		var stringFromCharCode = String.fromCharCode;
+
+		// Cleanup from previous test.
+		context.clearRect( 0, 0, canvas.width, canvas.height );
+		context.fillText( stringFromCharCode.apply( this, set1 ), 0, 0 );
+		var rendered1 = canvas.toDataURL();
+
+		// Cleanup from previous test.
+		context.clearRect( 0, 0, canvas.width, canvas.height );
+		context.fillText( stringFromCharCode.apply( this, set2 ), 0, 0 );
+		var rendered2 = canvas.toDataURL();
+
+		return rendered1 === rendered2;
+	}
+
+	/**
+	 * Detects if the browser supports rendering emoji or flag emoji.
+	 *
+	 * Flag emoji are a single glyph made of two characters, so some browsers
+	 * (notably, Firefox OS X) don't support them.
+	 *
+	 * @since 4.2.0
+	 *
+	 * @private
+	 *
+	 * @param {string} type Whether to test for support of "flag" or "emoji".
+	 *
+	 * @return {boolean} True if the browser can render emoji, false if it cannot.
+	 */
+	function browserSupportsEmoji( type ) {
+		var isIdentical;
+
+		if ( ! context || ! context.fillText ) {
+			return false;
+		}
+
+		/*
+		 * Chrome on OS X added native emoji rendering in M41. Unfortunately,
+		 * it doesn't work when the font is bolder than 500 weight. So, we
+		 * check for bold rendering support to avoid invisible emoji in Chrome.
+		 */
+		context.textBaseline = 'top';
+		context.font = '600 32px Arial';
+
+		switch ( type ) {
+			case 'flag':
+				/*
+				 * Test for Transgender flag compatibility. This flag is shortlisted for the Emoji 13 spec,
+				 * but has landed in Twemoji early, so we can add support for it, too.
+				 *
+				 * To test for support, we try to render it, and compare the rendering to how it would look if
+				 * the browser doesn't render it correctly (white flag emoji + transgender symbol).
+				 */
+				isIdentical = emojiSetsRenderIdentically(
+					[ 0x1F3F3, 0xFE0F, 0x200D, 0x26A7, 0xFE0F ],
+					[ 0x1F3F3, 0xFE0F, 0x200B, 0x26A7, 0xFE0F ]
+				);
+
+				if ( isIdentical ) {
+					return false;
+				}
+
+				/*
+				 * Test for UN flag compatibility. This is the least supported of the letter locale flags,
+				 * so gives us an easy test for full support.
+				 *
+				 * To test for support, we try to render it, and compare the rendering to how it would look if
+				 * the browser doesn't render it correctly ([U] + [N]).
+				 */
+				isIdentical = emojiSetsRenderIdentically(
+					[ 0xD83C, 0xDDFA, 0xD83C, 0xDDF3 ],
+					[ 0xD83C, 0xDDFA, 0x200B, 0xD83C, 0xDDF3 ]
+				);
+
+				if ( isIdentical ) {
+					return false;
+				}
+
+				/*
+				 * Test for English flag compatibility. England is a country in the United Kingdom, it
+				 * does not have a two letter locale code but rather an five letter sub-division code.
+				 *
+				 * To test for support, we try to render it, and compare the rendering to how it would look if
+				 * the browser doesn't render it correctly (black flag emoji + [G] + [B] + [E] + [N] + [G]).
+				 */
+				isIdentical = emojiSetsRenderIdentically(
+					[ 0xD83C, 0xDFF4, 0xDB40, 0xDC67, 0xDB40, 0xDC62, 0xDB40, 0xDC65, 0xDB40, 0xDC6E, 0xDB40, 0xDC67, 0xDB40, 0xDC7F ],
+					[ 0xD83C, 0xDFF4, 0x200B, 0xDB40, 0xDC67, 0x200B, 0xDB40, 0xDC62, 0x200B, 0xDB40, 0xDC65, 0x200B, 0xDB40, 0xDC6E, 0x200B, 0xDB40, 0xDC67, 0x200B, 0xDB40, 0xDC7F ]
+				);
+
+				return ! isIdentical;
+			case 'emoji':
+				/*
+				 * Why can't we be friends? Everyone can now shake hands in emoji, regardless of skin tone!
+				 *
+				 * To test for Emoji 14.0 support, try to render a new emoji: Handshake: Light Skin Tone, Dark Skin Tone.
+				 *
+				 * The Handshake: Light Skin Tone, Dark Skin Tone emoji is a ZWJ sequence combining 🫱 Rightwards Hand,
+				 * 🏻 Light Skin Tone, a Zero Width Joiner, 🫲 Leftwards Hand, and 🏿 Dark Skin Tone.
+				 *
+				 * 0x1FAF1 == Rightwards Hand
+				 * 0x1F3FB == Light Skin Tone
+				 * 0x200D == Zero-Width Joiner (ZWJ) that links the code points for the new emoji or
+				 * 0x200B == Zero-Width Space (ZWS) that is rendered for clients not supporting the new emoji.
+				 * 0x1FAF2 == Leftwards Hand
+				 * 0x1F3FF == Dark Skin Tone.
+				 *
+				 * When updating this test for future Emoji releases, ensure that individual emoji that make up the
+				 * sequence come from older emoji standards.
+				 */
+				isIdentical = emojiSetsRenderIdentically(
+					[0x1FAF1, 0x1F3FB, 0x200D, 0x1FAF2, 0x1F3FF],
+					[0x1FAF1, 0x1F3FB, 0x200B, 0x1FAF2, 0x1F3FF]
+				);
+
+				return ! isIdentical;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Adds a script to the head of the document.
+	 *
+	 * @ignore
+	 *
+	 * @since 4.2.0
+	 *
+	 * @param {Object} src The url where the script is located.
+	 * @return {void}
+	 */
+	function addScript( src ) {
+		var script = document.createElement( 'script' );
+
+		script.src = src;
+		script.defer = script.type = 'text/javascript';
+		document.getElementsByTagName( 'head' )[0].appendChild( script );
+	}
+
+	tests = Array( 'flag', 'emoji' );
+
+	settings.supports = {
+		everything: true,
+		everythingExceptFlag: true
+	};
+
+	/*
+	 * Tests the browser support for flag emojis and other emojis, and adjusts the
+	 * support settings accordingly.
+	 */
+	for( ii = 0; ii < tests.length; ii++ ) {
+		settings.supports[ tests[ ii ] ] = browserSupportsEmoji( tests[ ii ] );
+
+		settings.supports.everything = settings.supports.everything && settings.supports[ tests[ ii ] ];
+
+		if ( 'flag' !== tests[ ii ] ) {
+			settings.supports.everythingExceptFlag = settings.supports.everythingExceptFlag && settings.supports[ tests[ ii ] ];
+		}
+	}
+
+	settings.supports.everythingExceptFlag = settings.supports.everythingExceptFlag && ! settings.supports.flag;
+
+	// Sets DOMReady to false and assigns a ready function to settings.
+	settings.DOMReady = false;
+	settings.readyCallback = function() {
+		settings.DOMReady = true;
+	};
+
+	// When the browser can not render everything we need to load a polyfill.
+	if ( ! settings.supports.everything ) {
+		ready = function() {
+			settings.readyCallback();
+		};
+
+		/*
+		 * Cross-browser version of adding a dom ready event.
+		 */
+		if ( document.addEventListener ) {
+			document.addEventListener( 'DOMContentLoaded', ready, false );
+			window.addEventListener( 'load', ready, false );
+		} else {
+			window.attachEvent( 'onload', ready );
+			document.attachEvent( 'onreadystatechange', function() {
+				if ( 'complete' === document.readyState ) {
+					settings.readyCallback();
+				}
+			} );
+		}
+
+		src = settings.source || {};
+
+		if ( src.concatemoji ) {
+			addScript( src.concatemoji );
+		} else if ( src.wpemoji && src.twemoji ) {
+			addScript( src.twemoji );
+			addScript( src.wpemoji );
+		}
+	}
+
+} )( window, document, window._wpemojiSettings );
+</script>
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 0.07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='sb_instagram_styles-css' href='../../app/plugins/instagram-feed/css/sbi-styles.min.css?ver=2.9.4' type='text/css' media='all'>
+<link rel='stylesheet' id='wp-block-library-css' href='../wp-includes/css/dist/block-library/style.css?ver=6.0' type='text/css' media='all'>
+<link rel='stylesheet' id='aislin-testimonials-css' href='../../app/plugins/aislin-testimonials/public/css/app.css?ver=1.0.0' type='text/css' media='all'>
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+</style>
+<link rel='stylesheet' id='contact-form-7-css' href='../../app/plugins/contact-form-7/includes/css/styles.css?ver=5.5.2' type='text/css' media='all'>
+<link rel='stylesheet' id='mega-submenu-css' href='../../app/plugins/mega-submenu/public/css/style.css?ver=1.3.2' type='text/css' media='all'>
+<link rel='stylesheet' id='mega-submenu-woocommerce-css' href='../../app/plugins/mega-submenu/public/css/woocommerce.css?ver=1.3.2' type='text/css' media='all'>
+<link rel='stylesheet' id='ed-school-plugin-elementor-css' href='../../app/plugins/ed-school-plugin/includes/elementor/assets/css/main.css?ver=6.0' type='text/css' media='all'>
+<link rel='stylesheet' id='ed-school-theme-icons-css' href='../../app/themes/ed-school/assets/css/theme-icons.css?ver=6.0' type='text/css' media='all'>
+<link rel='stylesheet' id='elementor-icons-css' href='../../app/plugins/elementor/assets/lib/eicons/css/elementor-icons.css?ver=5.15.0' type='text/css' media='all'>
+<link rel='stylesheet' id='elementor-frontend-legacy-css' href='../../app/plugins/elementor/assets/css/frontend-legacy.css?ver=3.6.4' type='text/css' media='all'>
+<link rel='stylesheet' id='elementor-frontend-css' href='../../app/plugins/elementor/assets/css/frontend.css?ver=3.6.4' type='text/css' media='all'>
+<link rel='stylesheet' id='elementor-post-2689-css' href='../../app/uploads/sites/4/elementor/css/post-2689.css?ver=1650537998' type='text/css' media='all'>
+<link rel='stylesheet' id='font-awesome-5-all-css' href='../../app/plugins/elementor/assets/lib/font-awesome/css/all.css?ver=3.6.4' type='text/css' media='all'>
+<link rel='stylesheet' id='font-awesome-4-shim-css' href='../../app/plugins/elementor/assets/lib/font-awesome/css/v4-shims.css?ver=3.6.4' type='text/css' media='all'>
+<link rel='stylesheet' id='elementor-post-151-css' href='../../app/uploads/sites/4/elementor/css/post-151.css?ver=1650541795' type='text/css' media='all'>
+<link rel='stylesheet' id='font-awesome-css' href='../../app/plugins/elementor/assets/lib/font-awesome/css/font-awesome.css?ver=4.7.0' type='text/css' media='all'>
+<link rel='stylesheet' id='ed-school-plugin-style-css' href='../../app/plugins/ed-school-plugin/public/css/style.css?ver=6.0' type='text/css' media='all'>
+<link rel='stylesheet' id='groundwork-grid-css' href='../../app/themes/ed-school/assets/css/groundwork-responsive.css?ver=6.0' type='text/css' media='all'>
+<link rel='stylesheet' id='js_composer_front-css' href='../../app/plugins/js_composer/assets/css/js_composer.min.css?ver=6.11.0' type='text/css' media='all'>
+<link rel='stylesheet' id='ed-school-style-css' href='../../app/themes/ed-school/style.css?ver=6.0' type='text/css' media='all'>
+<style id='ed-school-style-inline-css' type='text/css'>
+.header-mobile {display: none;}@media screen and (max-width:950px) {.header-left {padding-left: 0;}.wh-header, .wh-top-bar {display: none;}.header-mobile {display: block;}}
+</style>
+<link rel='stylesheet' id='magnific-popup-css' href='../../app/plugins/ed-school-plugin/includes/elementor/widgets/video-popup/assets/magnific-popup.css?ver=6.0' type='text/css' media='all'>
+<link rel="preload" as="style" href="../../css.css?family=Roboto:400%7CMontserrat:100,200,300,400,500,600,700,800,900,100italic,200italic,300italic,400italic,500italic,600italic,700italic,800italic,900italic&#038;subset=latin&#038;display=swap&#038;ver=1573477070"><link rel="stylesheet" href="../../css.css?family=Roboto:400%7CMontserrat:100,200,300,400,500,600,700,800,900,100italic,200italic,300italic,400italic,500italic,600italic,700italic,800italic,900italic&#038;subset=latin&#038;display=swap&#038;ver=1573477070" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="../../css.css?family=Roboto:400%7CMontserrat:100,200,300,400,500,600,700,800,900,100italic,200italic,300italic,400italic,500italic,600italic,700italic,800italic,900italic&#038;subset=latin&#038;display=swap&#038;ver=1573477070"></noscript><link rel='stylesheet' id='ed_school_options_style-css' href='../../app/uploads/sites/4/ed_school_options_style.css?ver=6.0' type='text/css' media='all'>
+<style id='ed_school_options_style-inline-css' type='text/css'>
+#footer-top, #latest-news, #features, #welcome {
+    background-repeat: repeat-y !important;
+    background-size: 100% !important;
+}
+
+@media (max-width: 768px) {
+   #footer-top, #latest-news, #features, #welcome {
+        background-image: none !important;
+    }
+}
+</style>
+<link rel='stylesheet' id='elementor-post-1533-css' href='../../app/uploads/sites/4/elementor/css/post-1533.css?ver=1650538103' type='text/css' media='all'>
+<link rel='stylesheet' id='elementor-post-1831-css' href='../../app/uploads/sites/4/elementor/css/post-1831.css?ver=1650537998' type='text/css' media='all'>
+<link rel='stylesheet' id='elementor-post-1848-css' href='../../app/uploads/sites/4/elementor/css/post-1848.css?ver=1650537998' type='text/css' media='all'>
+<link rel='stylesheet' id='elementor-post-1538-css' href='../../app/uploads/sites/4/elementor/css/post-1538.css?ver=1650538104' type='text/css' media='all'>
+<link rel='stylesheet' id='google-fonts-1-css' href='../../css-1.css?family=Roboto%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CRoboto+Slab%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CMontserrat%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic&#038;display=auto&#038;ver=6.0' type='text/css' media='all'>
+<link rel='stylesheet' id='elementor-icons-shared-0-css' href='../../app/plugins/elementor/assets/lib/font-awesome/css/fontawesome.css?ver=5.15.3' type='text/css' media='all'>
+<link rel='stylesheet' id='elementor-icons-fa-brands-css' href='../../app/plugins/elementor/assets/lib/font-awesome/css/brands.css?ver=5.15.3' type='text/css' media='all'>
+<link rel='stylesheet' id='elementor-icons-fa-solid-css' href='../../app/plugins/elementor/assets/lib/font-awesome/css/solid.css?ver=5.15.3' type='text/css' media='all'>
+<link rel='stylesheet' id='elementor-icons-fa-regular-css' href='../../app/plugins/elementor/assets/lib/font-awesome/css/regular.css?ver=5.15.3' type='text/css' media='all'>
+<script type='text/javascript' src='../wp-includes/js/dist/development/react-refresh-runtime.js?ver=4fb86f241c3b2d9d9e0411b507079823' id='wp-react-refresh-runtime-js'></script>
+<script type='text/javascript' src='../wp-includes/js/dist/development/react-refresh-entry.js?ver=8151afc94a5ebc73b7a8229f0d7ee352' id='wp-react-refresh-entry-js'></script>
+<script type='text/javascript' src='../wp-includes/js/jquery/jquery.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='../wp-includes/js/jquery/jquery-migrate.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' id='mega-submenu-js-extra'>
+/* <![CDATA[ */
+var msm_mega_submenu = {"data":{"submenu_items_position_relative":0,"mobile_menu_trigger_click_bellow":768}};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../app/plugins/mega-submenu/public/js/msm-main.min.js?ver=1.3.2' id='mega-submenu-js'></script>
+<script type='text/javascript' src='../../app/plugins/elementor/assets/lib/font-awesome/js/v4-shims.js?ver=3.6.4' id='font-awesome-4-shim-js'></script>
+<script type='text/javascript' src='../../app/themes/ed-school/assets/js/vendor/modernizr-2.7.0.min.js' id='modernizr-js'></script>
+<link rel="https://api.w.org/" href="../wp-json/index.htm.json"><link rel="alternate" type="application/json" href="../wp-json/wp/v2/pages/151.json"><link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://ed.aislinthemes.com/modern/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="../wp-includes/wlwmanifest.xml"> 
+<meta name="generator" content="WordPress 6.0">
+<link rel="canonical" href="index.htm">
+<link rel='shortlink' href='index.htm?p=151'>
+<link rel="alternate" type="application/json+oembed" href="../wp-json/oembed/1.0/embed-14.json?url=http%3A%2F%2Fed.aislinthemes.com%2Fmodern%2Fgallery%2F">
+<link rel="alternate" type="text/xml+oembed" href="../wp-json/oembed/1.0/embed-14.xml?url=http%3A%2F%2Fed.aislinthemes.com%2Fmodern%2Fgallery%2F&#038;format=xml">
+<meta name="framework" content="Redux 4.3.1"><meta name="tec-api-version" content="v1"><meta name="tec-api-origin" content="http://ed.aislinthemes.com/modern"><link rel="https://theeventscalendar.com/" href="../wp-json/tribe/events/v1/index.htm.json">
+<style type="text/css" id="breadcrumb-trail-css">.breadcrumbs .trail-browse,.breadcrumbs .trail-items,.breadcrumbs .trail-items li {display: inline-block;margin:0;padding: 0;border:none;background:transparent;text-indent: 0;}.breadcrumbs .trail-browse {font-size: inherit;font-style:inherit;font-weight: inherit;color: inherit;}.breadcrumbs .trail-items {list-style: none;}.trail-items li::after {content: "\002F";padding: 0 0.5em;}.trail-items li:last-of-type::after {display: none;}</style>
+<meta name="generator" content="Powered by WPBakery Page Builder - drag and drop page builder for WordPress.">
+<meta name="generator" content="Powered by Slider Revolution 6.6.12 - responsive, Mobile-Friendly Slider Plugin for WordPress with comfortable drag and drop interface.">
+<script>function setREVStartSize(e){
+			//window.requestAnimationFrame(function() {
+				window.RSIW = window.RSIW===undefined ? window.innerWidth : window.RSIW;
+				window.RSIH = window.RSIH===undefined ? window.innerHeight : window.RSIH;
+				try {
+					var pw = document.getElementById(e.c).parentNode.offsetWidth,
+						newh;
+					pw = pw===0 || isNaN(pw) || (e.l=="fullwidth" || e.layout=="fullwidth") ? window.RSIW : pw;
+					e.tabw = e.tabw===undefined ? 0 : parseInt(e.tabw);
+					e.thumbw = e.thumbw===undefined ? 0 : parseInt(e.thumbw);
+					e.tabh = e.tabh===undefined ? 0 : parseInt(e.tabh);
+					e.thumbh = e.thumbh===undefined ? 0 : parseInt(e.thumbh);
+					e.tabhide = e.tabhide===undefined ? 0 : parseInt(e.tabhide);
+					e.thumbhide = e.thumbhide===undefined ? 0 : parseInt(e.thumbhide);
+					e.mh = e.mh===undefined || e.mh=="" || e.mh==="auto" ? 0 : parseInt(e.mh,0);
+					if(e.layout==="fullscreen" || e.l==="fullscreen")
+						newh = Math.max(e.mh,window.RSIH);
+					else{
+						e.gw = Array.isArray(e.gw) ? e.gw : [e.gw];
+						for (var i in e.rl) if (e.gw[i]===undefined || e.gw[i]===0) e.gw[i] = e.gw[i-1];
+						e.gh = e.el===undefined || e.el==="" || (Array.isArray(e.el) && e.el.length==0)? e.gh : e.el;
+						e.gh = Array.isArray(e.gh) ? e.gh : [e.gh];
+						for (var i in e.rl) if (e.gh[i]===undefined || e.gh[i]===0) e.gh[i] = e.gh[i-1];
+											
+						var nl = new Array(e.rl.length),
+							ix = 0,
+							sl;
+						e.tabw = e.tabhide>=pw ? 0 : e.tabw;
+						e.thumbw = e.thumbhide>=pw ? 0 : e.thumbw;
+						e.tabh = e.tabhide>=pw ? 0 : e.tabh;
+						e.thumbh = e.thumbhide>=pw ? 0 : e.thumbh;
+						for (var i in e.rl) nl[i] = e.rl[i]<window.RSIW ? 0 : e.rl[i];
+						sl = nl[0];
+						for (var i in nl) if (sl>nl[i] && nl[i]>0) { sl = nl[i]; ix=i;}
+						var m = pw>(e.gw[ix]+e.tabw+e.thumbw) ? 1 : (pw-(e.tabw+e.thumbw)) / (e.gw[ix]);
+						newh =  (e.gh[ix] * m) + (e.tabh + e.thumbh);
+					}
+					var el = document.getElementById(e.c);
+					if (el!==null && el) el.style.height = newh+"px";
+					el = document.getElementById(e.c+"_wrapper");
+					if (el!==null && el) {
+						el.style.height = newh+"px";
+						el.style.display = "block";
+					}
+				} catch(e){
+					console.log("Failure at Presize of Slider:" + e)
+				}
+			//});
+		  };</script>
+<noscript><style> .wpb_animate_when_almost_visible { opacity: 1; }</style></noscript></head>
+<body class="page-template page-template-template-fullwidth page-template-template-fullwidth-php page page-id-151 wp-custom-logo tribe-no-js header-top page-title-enabled wpb-js-composer js-comp-ver-6.11.0 vc_responsive elementor-default elementor-kit-2689 elementor-page elementor-page-151">
+		
+		
+		
+
+			<div class="header-mobile">
+				<div data-elementor-type="wp-post" data-elementor-id="2606" class="elementor elementor-2606">
+						<div class="elementor-inner">
+				<div class="elementor-section-wrap">
+									<section class="elementor-section elementor-top-section elementor-element elementor-element-0d991fe elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="0d991fe" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-0dd8647" data-id="0dd8647" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="left elementor-element elementor-element-03b433f elementor-widget elementor-widget-scp_menu" data-id="03b433f" data-element_type="widget" data-widget_type="scp_menu.default">
+				<div class="elementor-widget-container">
+			<div id="wh-mobile-menu" class="respmenu-wrap">
+	<div class="respmenu-header">
+					<a href="../index.htm" class="respmenu-header-logo-link">
+				<img src="../../app/uploads/sites/4/2019/08/ed-logo-grey1.png" class="respmenu-header-logo" alt="mobile-logo">
+			</a>
+				<div class="respmenu-open">
+					<hr>
+			<hr>
+			<hr>
+				</div>
+	</div>
+	
+	
+	
+	<div class="menu-mobile-menu-container"><ul id="menu-mobile-menu-1" class="respmenu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-1530 current_page_item menu-item-2395 msm-top-level-item"><a href="../index.htm" aria-current="page">Home</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1877 msm-top-level-item"><a href="../about-us/index.htm">About Us</a>
+</li>
+
+
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1887 msm-top-level-item"><a href="../student/index.htm">Student</a>
+<div class="respmenu-submenu-toggle cbp-respmenu-more"><i class="icon-edright-arrow"></i></div>
+
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1906"><a href="../uniforms/index.htm">Uniforms</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1905"><a href="../schoolhours/index.htm">School Hours</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1905"><a href="../academiccalender/index.htm">Academic Calender</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1905"><a href="..holidays/index.htm">Holidays</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1905"><a href="..studentcodeofconduct/index.htm">Student Code of Conduct</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1889 msm-top-level-item"><a href="../alumini/index.htm">Alumini</a>
+</li>
+
+
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1889 msm-top-level-item"><a href="../events/index.htm">Events</a>
+</li>
+
+
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1889 msm-top-level-item"><a href="../gallery/index.htm">Gallery</a>
+</li>
+
+
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1889 msm-top-level-item"><a href="../blog/index.htm">Blog</a>
+</li>
+
+
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2382 msm-top-level-item"><a href="../contact/index.htm">Contact</a></li>
+
+
+
+
+</div></div>
+		</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+									</div>
+			</div>
+					</div>
+			</div>
+		<div class="cbp-row wh-header top wh-sticky-header-enabled">
+				<div data-elementor-type="wp-post" data-elementor-id="1533" class="elementor elementor-1533">
+						<div class="elementor-inner">
+				<div class="elementor-section-wrap">
+				
+				
+				
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-f985d2d elementor-section-stretched elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="f985d2d" data-element_type="section" data-settings="{&quot;stretch_section&quot;:&quot;section-stretched&quot;}">
+						
+<style>
+            .blink {
+               color: red;
+                font-family: sans-serif;
+				align: center;
+				
+				
+            }
+            
+        </style>				
+	<marquee class="blink" bgcolor="#66b2ff">Admission Open Batch(2023-2024).</marquee>
+	
+			
+		</section>
+		
+		
+				
+				
+				
+				
+									<section class="elementor-section elementor-top-section elementor-element elementor-element-f985d2d elementor-section-stretched elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="f985d2d" data-element_type="section" data-settings="{&quot;stretch_section&quot;:&quot;section-stretched&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-b6dc7ce width-auto" data-id="b6dc7ce" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-1bb33ca elementor-widget elementor-widget-scp_logo" data-id="1bb33ca" data-element_type="widget" data-widget_type="scp_logo.default">
+				<div class="elementor-widget-container">
+
+	
+			<div class="elementor-image"><a href="../index.htm"><img src="../../app/uploads/sites/4/2019/08/ed-logo-grey.png" alt="logo"></a></div>		</div>
+				</div>
+						</div>
+					</div>
+		</div>
+		
+		
+		
+			<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-9853566 width-auto margin-left-auto" data-id="9853566" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="right elementor-element elementor-element-b0a2c5a elementor-widget elementor-widget-scp_menu" data-id="b0a2c5a" data-element_type="widget" data-widget_type="scp_menu.default">
+				<div class="elementor-widget-container">
+			<div class="menu-top-menu-container"><ul id="menu-top-menu-1" class="sf-menu wh-menu-top right"><!-- <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-230 msm-top-level-item"><a href="#">Parents</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1817 msm-top-level-item"><a href="#">Staff</a></li> -->
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1818 msm-top-level-item"><img src="../../app/uploads/sites/4/2019/08/phone.png" alt="logo"><span>&nbsp; 0416-225-7171</span>	
+				</a>
+				</li>
+				
+				
+</ul></div>		</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-e8351c4 width-auto " data-id="e8351c4" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-7644782 elementor-align-right hoverable elementor-widget elementor-widget-button" data-id="7644782" data-element_type="widget" data-widget_type="button.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-button-wrapper">
+			<a href="#" class="elementor-button-link elementor-button elementor-size-md" role="button">
+						<span class="elementor-button-content-wrapper">
+						<span class="elementor-button-text">DONATE</span>
+		</span>
+					</a>
+		</div>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+		
+		
+		
+		
+		
+		
+								</div> 
+					</div>
+		</section>
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-98212d1 elementor-section-stretched elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="98212d1" data-element_type="section" data-settings="{&quot;stretch_section&quot;:&quot;section-stretched&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-66 elementor-top-column elementor-element elementor-element-1f7529c" data-id="1f7529c" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="right elementor-element elementor-element-22061b4 elementor-widget elementor-widget-scp_menu" data-id="22061b4" data-element_type="widget" data-widget_type="scp_menu.default">
+				<div class="elementor-widget-container">
+			<div id="cbp-menu-main" class="menu-main-menu-container"><ul id="menu-main-menu-1" class="sf-menu wh-menu-main left"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-1530 current_page_item menu-item-2396 msm-top-level-item"><a href="../index.htm" aria-current="page">Home</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-237 msm-top-level-item"><a href="../about-us/index.htm">About Us</a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-post_type_archive menu-item-object-tribe_events menu-item-2631"><a href="../teachers-page/index.htm">Teacher</a></li>
+</ul>
+
+
+
+</li>
+<li class="menu-item menu-item-type-post_type_archive menu-item-object-tribe_events menu-item-has-children menu-item-2632 msm-top-level-item"><a href="../student/index.htm">Student</a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-post_type_archive menu-item-object-tribe_events menu-item-2631"><a href="../uniforms/index.htm">Uniforms</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-tribe_events menu-item-1706"><a href="../schoolhours/index.htm">School Hours</a></li>
+	
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2618"><a href="../academiccalender/index.htm">Academic Calender</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-teacher menu-item-1742"><a href="../holidays/index.htm">Holidays</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2618"><a href="../studentcodeofconduct/index.htm">Student Code of Conduct</a></li>
+
+
+</ul>
+</li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1914 msm-top-level-item"><a href="../alumini/index.htm">Alumini</a>
+</li>
+
+
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1748 msm-top-level-item"><a href="../events/index.htm">Events</a>
+</li>
+
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1748 msm-top-level-item"><a href="../gallery/index.htm">Gallery</a>
+</li>
+
+
+
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-565 msm-top-level-item msm-menu-item menu-item-has-children msm-hover"><a href="../blog/index.htm">Blog</a><!-- News Submenu --><div class="msm-submenu" data-depth="0" data-width="1340" data-position="center">
+		<div data-elementor-type="wp-post" data-elementor-id="1831" class="elementor elementor-1831">
+						<div class="elementor-inner">
+				<div class="elementor-section-wrap">
+									<section class="elementor-section elementor-top-section elementor-element elementor-element-da350c7 elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="da350c7" data-element_type="section" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-66 elementor-top-column elementor-element elementor-element-3e3dbe5" data-id="3e3dbe5" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-4726914 elementor-widget elementor-widget-scp_post_list" data-id="4726914" data-element_type="widget" data-widget_type="scp_post_list.default">
+				<div class="elementor-widget-container">
+					<div class="linp-post-list layout_1">
+
+												<div class="vc_row">
+													<div class="item one third">
+	<div class="inner-wrap">
+					<div class="img-container">
+				<a href="open-schools-institut-constructivism/index.htm" title="Open School&#039;s Institut Constructivism School this Fast">
+				   <img width="768" height="410" src="../app/uploads/sites/4/2017/02/event-02-768x410.jpg" class="post-list-thumb wp-post-image" alt="" loading="lazy">			    </a>
+			</div>
+				<div class="data">
+			<div class="meta-data">
+				<div class="date">
+					<i class="icon-edtime3"></i>
+											February 13, 17									</div>
+											</div>
+			<h3>
+				<a title="Open School&#039;s Institut Constructivism School this Fast" href="open-schools-institut-constructivism/index.htm">
+					Open School&#039;s Institut Constructivism School this Fast				</a>
+			</h3>
+								</div>
+	</div>
+</div>													<div class="item one third">
+	<div class="inner-wrap">
+					<div class="img-container">
+				<a href="thank-you-for-bringing-in-those-toys/index.htm" title="Thank You for Bringing in Those Toys Address Below and Make">
+				   <img width="768" height="410" src="../app/uploads/sites/4/2017/02/event-01-768x410.jpg" class="post-list-thumb wp-post-image" alt="" loading="lazy">			    </a>
+			</div>
+				<div class="data">
+			<div class="meta-data">
+				<div class="date">
+					<i class="icon-edtime3"></i>
+											February 13, 17									</div>
+											</div>
+			<h3>
+				<a title="Thank You for Bringing in Those Toys Address Below and Make" href="thank-you-for-bringing-in-those-toys/index.htm">
+					Thank You for Bringing in Those Toys Address Below and Make				</a>
+			</h3>
+								</div>
+	</div>
+</div>													<div class="item one third">
+	<div class="inner-wrap">
+					<div class="img-container">
+				<a href="thinking-skills-simply-amazing-great/index.htm" title="Thinking skills Simply amazing! Great School Address">
+				   <img width="768" height="410" src="../app/uploads/sites/4/2017/02/event-04-768x410.jpg" class="post-list-thumb wp-post-image" alt="" loading="lazy">			    </a>
+			</div>
+				<div class="data">
+			<div class="meta-data">
+				<div class="date">
+					<i class="icon-edtime3"></i>
+											February 13, 17									</div>
+											</div>
+			<h3>
+				<a title="Thinking skills Simply amazing! Great School Address" href="thinking-skills-simply-amazing-great/index.htm">
+					Thinking skills Simply amazing! Great School Address				</a>
+			</h3>
+								</div>
+	</div>
+</div>											</div>
+							
+					</div>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-d8dad24" data-id="d8dad24" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-545a2bd wh-title-with-label elementor-view-default elementor-mobile-position-top elementor-vertical-align-top elementor-widget elementor-widget-icon-box" data-id="545a2bd" data-element_type="widget" data-widget_type="icon-box.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-icon-box-wrapper">
+						<div class="elementor-icon-box-icon">
+				<span class="elementor-icon elementor-animation-">
+				<i aria-hidden="true" class="fas fa-bullhorn"></i>				</span>
+			</div>
+						<div class="elementor-icon-box-content">
+				<h3 class="elementor-icon-box-title">
+					<span>
+						Read all news <b>INFO</b>					</span>
+				</h3>
+									<p class="elementor-icon-box-description">
+						Click edit button to change this text. Lorem ipsum dolor sit amet, consectet.					</p>
+							</div>
+		</div>
+				</div>
+				</div>
+				<div class="elementor-element elementor-element-1875303 elementor-align-left hoverable elementor-widget elementor-widget-button" data-id="1875303" data-element_type="widget" data-widget_type="button.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-button-wrapper">
+			<a href="news/index.htm" class="elementor-button-link elementor-button elementor-size-sm" role="button">
+						<span class="elementor-button-content-wrapper">
+						<span class="elementor-button-text">ALL NEWS</span>
+		</span>
+					</a>
+		</div>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+									</div>
+			</div>
+					</div>
+		</div>
+</li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2383 msm-top-level-item msm-menu-item menu-item-has-children msm-hover"><a href="../contact/index.htm">Contact</a><!-- Contact Submenu --><div class="msm-submenu" data-depth="0" data-width="1140" data-position="center">
+		<div data-elementor-type="wp-post" data-elementor-id="1848" class="elementor elementor-1848">
+						<div class="elementor-inner">
+				<div class="elementor-section-wrap">
+									<section class="elementor-section elementor-top-section elementor-element elementor-element-f237c8f elementor-section-full_width elementor-section-height-default elementor-section-height-default" data-id="f237c8f" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-25 elementor-top-column elementor-element elementor-element-d184153" data-id="d184153" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-ad13c36 elementor-widget elementor-widget-heading" data-id="ad13c36" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">Welcome to Siddhartha</h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-efb8403 elementor-widget elementor-widget-text-editor" data-id="efb8403" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+								<div class="elementor-text-editor elementor-clearfix">
+				Whatever you’ve got your sights set on, that’s merely the beginning. As a Gator you’ll learn to see beyond the horizon.					</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-6ff9a9e elementor-widget elementor-widget-heading" data-id="6ff9a9e" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<p class="elementor-heading-title elementor-size-default"><a href="http://=">READ MORE</a></p>		</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-25 elementor-top-column elementor-element elementor-element-0dfe504" data-id="0dfe504" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-658da56 elementor-widget elementor-widget-heading" data-id="658da56" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">Working Hours</h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-f24486a elementor-widget elementor-widget-scp_schedule" data-id="f24486a" data-element_type="widget" data-widget_type="scp_schedule.default">
+				<div class="elementor-widget-container">
+					<ul class="schedule">
+																<li class="odd">
+						<span class="left">
+							Mon-Wed						</span>
+						<span class="right">
+							8:00 - 8:40						</span>
+					</li>
+																				<li class="odd">
+						<span class="left">
+							Sat						</span>
+						<span class="right">
+							8:00 - 8:40						</span>
+					</li>
+									</ul>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+				<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-82d7ecb" data-id="82d7ecb" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-b28317b elementor-widget elementor-widget-heading" data-id="b28317b" data-element_type="widget" data-widget_type="heading.default">
+				<div class="elementor-widget-container">
+			<h2 class="elementor-heading-title elementor-size-default">Discover the new school advantage today</h2>		</div>
+				</div>
+				<div class="elementor-element elementor-element-70879f4 elementor-widget elementor-widget-text-editor" data-id="70879f4" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+								<div class="elementor-text-editor elementor-clearfix">
+				Whatever you’ve got your sights set on, that’s the beginning.
+
+					</div>
+						</div>
+				</div>
+				<div class="elementor-element elementor-element-081e13c elementor-align-center hoverable elementor-widget elementor-widget-button" data-id="081e13c" data-element_type="widget" data-widget_type="button.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-button-wrapper">
+			<a href="../contact/index.htm" class="elementor-button-link elementor-button elementor-size-sm" role="button">
+						<span class="elementor-button-content-wrapper">
+						<span class="elementor-button-text">DIRECT CONTACT</span>
+		</span>
+					</a>
+		</div>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+									</div>
+			</div>
+					</div>
+		</div>
+</li>
+</ul></div>		</div>
+				</div>
+						</div>
+					</div>
+		</div>
+		 		<div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-a6a2353 width-auto margin-left-auto" data-id="a6a2353" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+		 			<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-730b789 elementor-shape-circle e-grid-align-right elementor-grid-0 elementor-widget elementor-widget-social-icons" data-id="730b789" data-element_type="widget" data-widget_type="social-icons.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-social-icons-wrapper elementor-grid">
+							<span class="elementor-grid-item">
+					<a class="elementor-icon elementor-social-icon elementor-social-icon-facebook-f elementor-repeater-item-240e416" target="_blank">
+						<span class="elementor-screen-only">Facebook-f</span>
+						<i class="fab fa-facebook-f"></i>					</a>
+				</span>
+							<span class="elementor-grid-item">
+					<a class="elementor-icon elementor-social-icon elementor-social-icon-twitter elementor-repeater-item-b9443df" target="_blank">
+						<span class="elementor-screen-only">Twitter</span>
+						<i class="fab fa-twitter"></i>					</a>
+				</span>
+							<span class="elementor-grid-item">
+					<a class="elementor-icon elementor-social-icon elementor-social-icon-linkedin-in elementor-repeater-item-eb9b1ee" target="_blank">
+						<span class="elementor-screen-only">Linkedin-in</span>
+						<i class="fab fa-linkedin-in"></i>					</a>
+				</span>
+							<span class="elementor-grid-item">
+					<a class="elementor-icon elementor-social-icon elementor-social-icon-youtube elementor-repeater-item-3bcd036" target="_blank">
+						<span class="elementor-screen-only">Youtube</span>
+						<i class="fab fa-youtube"></i>					</a>
+				</span>
+					</div>
+				</div>
+				</div>
+						</div>
+				 	</div>
+		 </div> 
+		 						</div>
+					</div>
+		</section>
+									</div>
+			</div>
+					</div>
+			</div>
+
+	<div class="cbp-row wh-page-title-bar">
+				</div>
+	
+		<div class="cbp-row wh-breadcrumbs-bar">
+		<div class="cbp-container">
+			<div class="one whole wh-padding wh-breadcrumbs-wrapper">
+				<div class="wh-breadcrumbs align-left">
+					<nav role="navigation" aria-label="Breadcrumbs" class="breadcrumb-trail breadcrumbs" itemprop="breadcrumb"><ul class="trail-items" itemscope="" itemtype="http://schema.org/BreadcrumbList"><meta name="numberOfItems" content="2"><meta name="itemListOrder" content="Ascending"><li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem" class="trail-item trail-begin"><a href="../index.htm" rel="home" itemprop="item"><span itemprop="name">Home</span></a><meta itemprop="position" content="1"></li><li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem" class="trail-item trail-end"><span itemprop="item"><span itemprop="name">Gallery</span></span><meta itemprop="position" content="2"></li></ul></nav>				</div>
+			</div>
+		</div>
+	</div>
+		
+		
+		
+<div class="cbp-row wh-content">
+	<div class="cbp-container">
+		<div class="entry-content one whole wh-padding">
+						<div data-elementor-type="wp-post" data-elementor-id="151" class="elementor elementor-151">
+						<div class="elementor-inner">
+				<div class="elementor-section-wrap">
+									<section class="elementor-section elementor-top-section elementor-element elementor-element-5617487b elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="5617487b" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-no">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-794150b" data-id="794150b" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-d458c89 gallery-spacing-custom elementor-widget elementor-widget-image-gallery" data-id="d458c89" data-element_type="widget" data-widget_type="image-gallery.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-image-gallery">
+			
+		<style type="text/css">
+			#gallery-1 {
+				margin: auto;
+			}
+			#gallery-1 .gallery-item {
+				float: left;
+				margin-top: 10px;
+				text-align: center;
+				width: 33%;
+			}
+			#gallery-1 img {
+				border: 2px solid #cfcfcf;
+			}
+			#gallery-1 .gallery-caption {
+				margin-left: 0;
+			}
+			/* see gallery_shortcode() in wp-includes/media.php */
+		</style>
+		<div id='gallery-1' class='gallery galleryid-151 gallery-columns-3 gallery-size-ed-school-medium-alt'><dl class='gallery-item'>
+			<dt class='gallery-icon landscape'>
+				<a data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="d458c89" data-elementor-lightbox-title="06" e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjIsInVybCI6Imh0dHA6XC9cL2VkLmFpc2xpbnRoZW1lcy5jb21cL2FwcFwvdXBsb2Fkc1wvc2l0ZXNcLzRcLzIwMTdcLzAzXC8wNi5qcGciLCJzbGlkZXNob3ciOiJkNDU4Yzg5In0%3D" href='../../app/uploads/sites/4/2017/03/06.jpg'><img width="767" height="410" src="../../app/uploads/sites/4/2017/03/06-767x410.jpg" class="attachment-ed-school-medium-alt size-ed-school-medium-alt" alt="" loading="lazy" srcset="../../app/uploads/sites/4/2017/03/06-767x410.jpg 767w, ../../app/uploads/sites/4/2017/03/06-150x81.jpg 150w" sizes="(max-width: 767px) 100vw, 767px"></a>
+			</dt></dl><dl class='gallery-item'>
+			<dt class='gallery-icon landscape'>
+				<a data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="d458c89" data-elementor-lightbox-title="1" e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjEsInVybCI6Imh0dHA6XC9cL2VkLmFpc2xpbnRoZW1lcy5jb21cL2FwcFwvdXBsb2Fkc1wvc2l0ZXNcLzRcLzIwMTdcLzAzXC8wNTUuanBnIiwic2xpZGVzaG93IjoiZDQ1OGM4OSJ9" href='../../app/uploads/sites/4/2017/03/1.jpg'><img width="767" height="410" src="../../app/uploads/sites/4/2017/03/1.jpg" class="attachment-ed-school-medium-alt size-ed-school-medium-alt" alt="" loading="lazy" srcset="../../app/uploads/sites/4/2017/03/1.jpg 767w" sizes="(max-width: 767px) 100vw, 767px"></a>
+			</dt></dl><dl class='gallery-item'>
+			<dt class='gallery-icon landscape'>
+				<a data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="d458c89" data-elementor-lightbox-title="07" e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjMsInVybCI6Imh0dHA6XC9cL2VkLmFpc2xpbnRoZW1lcy5jb21cL2FwcFwvdXBsb2Fkc1wvc2l0ZXNcLzRcLzIwMTdcLzAzXC8wNy5qcGciLCJzbGlkZXNob3ciOiJkNDU4Yzg5In0%3D" href='../../app/uploads/sites/4/2017/03/07.jpg'><img width="767" height="410" src="../../app/uploads/sites/4/2017/03/07-767x410.jpg" class="attachment-ed-school-medium-alt size-ed-school-medium-alt" alt="" loading="lazy" srcset="../../app/uploads/sites/4/2017/03/07-767x410.jpg 767w, ../../app/uploads/sites/4/2017/03/07-150x81.jpg 150w" sizes="(max-width: 767px) 100vw, 767px"></a>
+			</dt></dl><br style="clear: both"><dl class='gallery-item'>
+			<dt class='gallery-icon landscape'>
+				<a data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="d458c89" data-elementor-lightbox-title="08" e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjQsInVybCI6Imh0dHA6XC9cL2VkLmFpc2xpbnRoZW1lcy5jb21cL2FwcFwvdXBsb2Fkc1wvc2l0ZXNcLzRcLzIwMTdcLzAzXC8wOC5qcGciLCJzbGlkZXNob3ciOiJkNDU4Yzg5In0%3D" href='../../app/uploads/sites/4/2017/03/08.jpg'><img width="767" height="410" src="../../app/uploads/sites/4/2017/03/08-767x410.jpg" class="attachment-ed-school-medium-alt size-ed-school-medium-alt" alt="" loading="lazy" srcset="../../app/uploads/sites/4/2017/03/08-767x410.jpg 767w, ../../app/uploads/sites/4/2017/03/08-150x81.jpg 150w" sizes="(max-width: 767px) 100vw, 767px"></a>
+			</dt></dl><dl class='gallery-item'>
+			<dt class='gallery-icon landscape'>
+				<a data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="d458c89" data-elementor-lightbox-title="04" e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjUsInVybCI6Imh0dHA6XC9cL2VkLmFpc2xpbnRoZW1lcy5jb21cL2FwcFwvdXBsb2Fkc1wvc2l0ZXNcLzRcLzIwMTdcLzAzXC8wNC5qcGciLCJzbGlkZXNob3ciOiJkNDU4Yzg5In0%3D" href='../../app/uploads/sites/4/2017/03/04.jpg'><img width="767" height="410" src="../../app/uploads/sites/4/2017/03/04-767x410.jpg" class="attachment-ed-school-medium-alt size-ed-school-medium-alt" alt="" loading="lazy" srcset="../../app/uploads/sites/4/2017/03/04-767x410.jpg 767w, ../../app/uploads/sites/4/2017/03/04-150x81.jpg 150w" sizes="(max-width: 767px) 100vw, 767px"></a>
+			</dt></dl><dl class='gallery-item'>
+			<dt class='gallery-icon landscape'>
+				<a data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="d458c89" data-elementor-lightbox-title="03" e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjYsInVybCI6Imh0dHA6XC9cL2VkLmFpc2xpbnRoZW1lcy5jb21cL2FwcFwvdXBsb2Fkc1wvc2l0ZXNcLzRcLzIwMTdcLzAzXC8wMy5wbmciLCJzbGlkZXNob3ciOiJkNDU4Yzg5In0%3D" href='../../app/uploads/sites/4/2017/03/03.jpg'><img width="767" height="410" src="../../app/uploads/sites/4/2017/03/03-767x410.jpg" class="attachment-ed-school-medium-alt size-ed-school-medium-alt" alt="" loading="lazy" srcset="../../app/uploads/sites/4/2017/03/03-767x410.jpg 767w, ../../app/uploads/sites/4/2017/03/03-150x81.jpg 150w" sizes="(max-width: 767px) 100vw, 767px"></a>
+			</dt></dl><br style="clear: both"><dl class='gallery-item'>
+			<dt class='gallery-icon landscape'>
+				<a data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="d458c89" data-elementor-lightbox-title="02" e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjcsInVybCI6Imh0dHA6XC9cL2VkLmFpc2xpbnRoZW1lcy5jb21cL2FwcFwvdXBsb2Fkc1wvc2l0ZXNcLzRcLzIwMTdcLzAzXC8wMi5wbmciLCJzbGlkZXNob3ciOiJkNDU4Yzg5In0%3D" href='../../app/uploads/sites/4/2017/03/02.jpg'><img width="767" height="410" src="../../app/uploads/sites/4/2017/03/02-767x410.jpg" class="attachment-ed-school-medium-alt size-ed-school-medium-alt" alt="" loading="lazy" srcset="../../app/uploads/sites/4/2017/03/02-767x410.jpg 767w, ../../app/uploads/sites/4/2017/03/02-150x81.jpg 150w" sizes="(max-width: 767px) 100vw, 767px"></a>
+			</dt></dl><dl class='gallery-item'>
+			<dt class='gallery-icon landscape'>
+				<a data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="d458c89" data-elementor-lightbox-title="01" e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjgsInVybCI6Imh0dHA6XC9cL2VkLmFpc2xpbnRoZW1lcy5jb21cL2FwcFwvdXBsb2Fkc1wvc2l0ZXNcLzRcLzIwMTdcLzAzXC8wMS5wbmciLCJzbGlkZXNob3ciOiJkNDU4Yzg5In0%3D" href='../../app/uploads/sites/4/2017/03/01.jpg'><img width="767" height="410" src="../../app/uploads/sites/4/2017/03/01-767x410.jpg" class="attachment-ed-school-medium-alt size-ed-school-medium-alt" alt="" loading="lazy" srcset="../../app/uploads/sites/4/2017/03/01-767x410.jpg 767w, ../../app/uploads/sites/4/2017/03/01-150x81.jpg 150w" sizes="(max-width: 767px) 100vw, 767px"></a>
+			</dt></dl>
+			<dl class='gallery-item'>
+			<dt class='gallery-icon landscape'>
+				<a data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="d458c89" data-elementor-lightbox-title="2" e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjEsInVybCI6Imh0dHA6XC9cL2VkLmFpc2xpbnRoZW1lcy5jb21cL2FwcFwvdXBsb2Fkc1wvc2l0ZXNcLzRcLzIwMTdcLzAzXC8wNTUuanBnIiwic2xpZGVzaG93IjoiZDQ1OGM4OSJ9" href='../../app/uploads/sites/4/2017/03/2.jpg'><img width="767" height="410" src="../../app/uploads/sites/4/2017/03/2.jpg" class="attachment-ed-school-medium-alt size-ed-school-medium-alt" alt="" loading="lazy" srcset="../../app/uploads/sites/4/2017/03/2.jpg 767w" sizes="(max-width: 767px) 100vw, 767px"></a>
+			</dt></dl>
+			<dl class='gallery-item'>
+			<dt class='gallery-icon landscape'>
+				<a data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="d458c89" data-elementor-lightbox-title="3" e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjEsInVybCI6Imh0dHA6XC9cL2VkLmFpc2xpbnRoZW1lcy5jb21cL2FwcFwvdXBsb2Fkc1wvc2l0ZXNcLzRcLzIwMTdcLzAzXC8wNTUuanBnIiwic2xpZGVzaG93IjoiZDQ1OGM4OSJ9" href='../../app/uploads/sites/4/2017/03/3.jpg'><img width="767" height="410" src="../../app/uploads/sites/4/2017/03/3.jpg" class="attachment-ed-school-medium-alt size-ed-school-medium-alt" alt="" loading="lazy" srcset="../../app/uploads/sites/4/2017/03/3.jpg 767w" sizes="(max-width: 767px) 100vw, 767px"></a>
+			</dt></dl>
+			<dl class='gallery-item'>
+			<dt class='gallery-icon landscape'>
+				<a data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="d458c89" data-elementor-lightbox-title="4" e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjEsInVybCI6Imh0dHA6XC9cL2VkLmFpc2xpbnRoZW1lcy5jb21cL2FwcFwvdXBsb2Fkc1wvc2l0ZXNcLzRcLzIwMTdcLzAzXC8wNTUuanBnIiwic2xpZGVzaG93IjoiZDQ1OGM4OSJ9" href='../../app/uploads/sites/4/2017/03/4.jpg'><img width="767" height="410" src="../../app/uploads/sites/4/2017/03/4.jpg" class="attachment-ed-school-medium-alt size-ed-school-medium-alt" alt="" loading="lazy" srcset="../../app/uploads/sites/4/2017/03/4.jpg 767w" sizes="(max-width: 767px) 100vw, 767px"></a>
+			</dt></dl>
+			<dl class='gallery-item'>
+			<dt class='gallery-icon landscape'>
+				<a data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="d458c89" data-elementor-lightbox-title="5" e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjEsInVybCI6Imh0dHA6XC9cL2VkLmFpc2xpbnRoZW1lcy5jb21cL2FwcFwvdXBsb2Fkc1wvc2l0ZXNcLzRcLzIwMTdcLzAzXC8wNTUuanBnIiwic2xpZGVzaG93IjoiZDQ1OGM4OSJ9" href='../../app/uploads/sites/4/2017/03/5.jpg'><img width="767" height="410" src="../../app/uploads/sites/4/2017/03/5.jpg" class="attachment-ed-school-medium-alt size-ed-school-medium-alt" alt="" loading="lazy" srcset="../../app/uploads/sites/4/2017/03/5.jpg 767w" sizes="(max-width: 767px) 100vw, 767px"></a>
+			</dt></dl>
+			<dl class='gallery-item'>
+			<dt class='gallery-icon landscape'>
+				<a data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="d458c89" data-elementor-lightbox-title="6" e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjEsInVybCI6Imh0dHA6XC9cL2VkLmFpc2xpbnRoZW1lcy5jb21cL2FwcFwvdXBsb2Fkc1wvc2l0ZXNcLzRcLzIwMTdcLzAzXC8wNTUuanBnIiwic2xpZGVzaG93IjoiZDQ1OGM4OSJ9" href='../../app/uploads/sites/4/2017/03/6.jpg'><img width="767" height="410" src="../../app/uploads/sites/4/2017/03/6.jpg" class="attachment-ed-school-medium-alt size-ed-school-medium-alt" alt="" loading="lazy" srcset="../../app/uploads/sites/4/2017/03/6.jpg 767w" sizes="(max-width: 767px) 100vw, 767px"></a>
+			</dt></dl>
+			<dl class='gallery-item'>
+			<dt class='gallery-icon landscape'>
+				<a data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="d458c89" data-elementor-lightbox-title="1" e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjEsInVybCI6Imh0dHA6XC9cL2VkLmFpc2xpbnRoZW1lcy5jb21cL2FwcFwvdXBsb2Fkc1wvc2l0ZXNcLzRcLzIwMTdcLzAzXC8wNTUuanBnIiwic2xpZGVzaG93IjoiZDQ1OGM4OSJ9" href='../../app/uploads/sites/4/2017/03/7.jpg'><img width="767" height="410" src="../../app/uploads/sites/4/2017/03/7.jpg" class="attachment-ed-school-medium-alt size-ed-school-medium-alt" alt="" loading="lazy" srcset="../../app/uploads/sites/4/2017/03/7.jpg 767w" sizes="(max-width: 767px) 100vw, 767px"></a>
+			</dt></dl>
+			<br style='clear: both'>
+		</div>
+		</div>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+									</div>
+			</div>
+					</div>
+						</div>
+	</div>
+</div>
+	<div class="cbp-row wh-footer">
+		<div class="cbp-container wh-padding">
+					<div data-elementor-type="wp-post" data-elementor-id="1538" class="elementor elementor-1538">
+						<div class="elementor-inner">
+				<div class="elementor-section-wrap">
+									
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+			<div class="cbp-row wh-footer">
+		<div class="cbp-container wh-padding">
+					<div data-elementor-type="wp-post" data-elementor-id="1538" class="elementor elementor-1538">
+						<div class="elementor-inner">
+				<div class="elementor-section-wrap">
+		
+				<section class="elementor-section elementor-top-section elementor-element elementor-element-3c1995d elementor-section-stretched elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="3c1995d" data-element_type="section" data-settings="{&quot;stretch_section&quot;:&quot;section-stretched&quot;}">
+						<div class="elementor-container elementor-column-gap-default">
+							<div class="elementor-row">
+					
+				<div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-ba4a281" data-id="ba4a281" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-b364229 elementor-widget elementor-widget-text-editor" data-id="b364229" data-element_type="widget" data-widget_type="text-editor.default">
+				<div class="elementor-widget-container">
+								<div class="elementor-text-editor elementor-clearfix">
+				<p>© 2023 All Rights Reserved</p>					</div>
+						</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
+									</div>
+			</div>
+					</div>
+				</div>
+	</div>
+
+		<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+			window.RS_MODULES = window.RS_MODULES || {};
+			window.RS_MODULES.modules = window.RS_MODULES.modules || {};
+			window.RS_MODULES.waiting = window.RS_MODULES.waiting || [];
+			window.RS_MODULES.defered = true;
+			window.RS_MODULES.moduleWaiting = window.RS_MODULES.moduleWaiting || {};
+			window.RS_MODULES.type = 'compiled';
+		</script>
+				<script>
+		( function ( body ) {
+			'use strict';
+			body.className = body.className.replace( /\btribe-no-js\b/, 'tribe-js' );
+		} )( document.body );
+		</script>
+		<!-- Instagram Feed JS -->
+<script type="text/javascript">
+var sbiajaxurl = "http://ed.aislinthemes.com/modern/wp-admin/admin-ajax.php";
+</script>
+<script> /* <![CDATA[ */var tribe_l10n_datatables = {"aria":{"sort_ascending":": activate to sort column ascending","sort_descending":": activate to sort column descending"},"length_menu":"Show _MENU_ entries","empty_table":"No data available in table","info":"Showing _START_ to _END_ of _TOTAL_ entries","info_empty":"Showing 0 to 0 of 0 entries","info_filtered":"(filtered from _MAX_ total entries)","zero_records":"No matching records found","search":"Search:","all_selected_text":"All items on this page were selected. ","select_all_link":"Select all pages","clear_selection":"Clear Selection.","pagination":{"all":"All","next":"Next","previous":"Previous"},"select":{"rows":{"0":"","_":": Selected %d rows","1":": Selected 1 row"}},"datepicker":{"dayNames":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"dayNamesShort":["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],"dayNamesMin":["S","M","T","W","T","F","S"],"monthNames":["January","February","March","April","May","June","July","August","September","October","November","December"],"monthNamesShort":["January","February","March","April","May","June","July","August","September","October","November","December"],"monthNamesMin":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"nextText":"Next","prevText":"Prev","currentText":"Today","closeText":"Done","today":"Today","clear":"Clear"}};/* ]]> */ </script><link rel='stylesheet' id='e-animations-css' href='../../app/plugins/elementor/assets/lib/animations/animations.min.css?ver=3.6.4' type='text/css' media='all'>
+<link rel='stylesheet' id='rs-plugin-settings-css' href='../../app/plugins/revslider/public/assets/css/rs6.css?ver=6.6.12' type='text/css' media='all'>
+<style id='rs-plugin-settings-inline-css' type='text/css'>
+#rs-demo-id {}
+</style>
+<script type='text/javascript' src='../wp-includes/js/dist/vendor/regenerator-runtime.js?ver=0.13.9' id='regenerator-runtime-js'></script>
+<script type='text/javascript' src='../wp-includes/js/dist/vendor/wp-polyfill.js?ver=3.15.0' id='wp-polyfill-js'></script>
+<script type='text/javascript' src='../wp-includes/js/dist/vendor/react.js?ver=17.0.1' id='react-js'></script>
+<script type='text/javascript' src='../wp-includes/js/dist/vendor/lodash.js?ver=4.17.19' id='lodash-js'></script>
+<script type='text/javascript' id='lodash-js-after'>
+window.lodash = _.noConflict();
+</script>
+<script type='text/javascript' src='../wp-includes/js/dist/vendor/react-dom.js?ver=17.0.1' id='react-dom-js'></script>
+<script type='text/javascript' src='../wp-includes/js/dist/dom-ready.js?ver=d996b53411d1533a84951212ab6ac4ff' id='wp-dom-ready-js'></script>
+<script type='text/javascript' src='../wp-includes/js/dist/hooks.js?ver=c6d64f2cb8f5c6bb49caca37f8828ce3' id='wp-hooks-js'></script>
+<script type='text/javascript' src='../wp-includes/js/dist/i18n.js?ver=ebee46757c6a411e38fd079a7ac71d94' id='wp-i18n-js'></script>
+<script type='text/javascript' id='wp-i18n-js-after'>
+wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
+</script>
+<script type='text/javascript' src='../wp-includes/js/dist/a11y.js?ver=a38319d7ba46c6e60f7f9d4c371222c5' id='wp-a11y-js'></script>
+<script type='text/javascript' src='../wp-includes/js/dist/url.js?ver=16385e4d69da65c7283790971de6b297' id='wp-url-js'></script>
+<script type='text/javascript' src='../wp-includes/js/dist/api-fetch.js?ver=63050163caffa6aac54e9ebf21fe0472' id='wp-api-fetch-js'></script>
+<script type='text/javascript' id='wp-api-fetch-js-after'>
+wp.apiFetch.use( wp.apiFetch.createRootURLMiddleware( "http://ed.aislinthemes.com/modern/wp-json/" ) );
+wp.apiFetch.nonceMiddleware = wp.apiFetch.createNonceMiddleware( "e8f02446a4" );
+wp.apiFetch.use( wp.apiFetch.nonceMiddleware );
+wp.apiFetch.use( wp.apiFetch.mediaUploadMiddleware );
+wp.apiFetch.nonceEndpoint = "http://ed.aislinthemes.com/modern/wp-admin/admin-ajax.php?action=rest-nonce";
+</script>
+<script type='text/javascript' src='../wp-includes/js/dist/blob.js?ver=87cf2365cd719a6954f1e2bb8bcc692a' id='wp-blob-js'></script>
+<script type='text/javascript' src='../wp-includes/js/dist/autop.js?ver=21d1d6c005241b908b592f52ad684a28' id='wp-autop-js'></script>
+<script type='text/javascript' src='../wp-includes/js/dist/block-serialization-default-parser.js?ver=8ee151736a1e51db2bafbb61ddd60634' id='wp-block-serialization-default-parser-js'></script>
+<script type='text/javascript' src='../wp-includes/js/dist/deprecated.js?ver=96593d5d272d008fbcb6912fa0b86778' id='wp-deprecated-js'></script>
+<script type='text/javascript' src='../wp-includes/js/dist/dom.js?ver=3c10edc1abf3fbbc79f17fd7d1d332eb' id='wp-dom-js'></script>
+<script type='text/javascript' src='../wp-includes/js/dist/escape-html.js?ver=00a5735837e9efe13da1d979f16a7105' id='wp-escape-html-js'></script>
+<script type='text/javascript' src='../wp-includes/js/dist/element.js?ver=3dfdc75a0abf30f057df44e9a39abe5b' id='wp-element-js'></script>
+<script type='text/javascript' src='../wp-includes/js/dist/is-shallow-equal.js?ver=649feec00389556f8015a6b97efc1cb1' id='wp-is-shallow-equal-js'></script>
+<script type='text/javascript' src='../wp-includes/js/dist/keycodes.js?ver=84a0e6bbcf0b9e1ea0184c3f2bf28022' id='wp-keycodes-js'></script>
+<script type='text/javascript' src='../wp-includes/js/dist/priority-queue.js?ver=efad6460ae6b28406d39866cb10731e0' id='wp-priority-queue-js'></script>
+<script type='text/javascript' src='../wp-includes/js/dist/compose.js?ver=da94d523b115836ddbf0b3b774ddd94a' id='wp-compose-js'></script>
+<script type='text/javascript' src='../wp-includes/js/dist/redux-routine.js?ver=5156478c032ea85a2bbdceeb7a43b0c1' id='wp-redux-routine-js'></script>
+<script type='text/javascript' src='../wp-includes/js/dist/data.js?ver=38ad563aa39c8f314fe6f6e430d81a69' id='wp-data-js'></script>
+<script type='text/javascript' id='wp-data-js-after'>
+( function() {
+	var userId = 0;
+	var storageKey = "WP_DATA_USER_" + userId;
+	wp.data
+		.use( wp.data.plugins.persistence, { storageKey: storageKey } );
+	wp.data.plugins.persistence.__unstableMigrate( { storageKey: storageKey } );
+} )();
+</script>
+<script type='text/javascript' src='../wp-includes/js/dist/html-entities.js?ver=c6385fb7cd9fdada1cf8892a545f8a26' id='wp-html-entities-js'></script>
+<script type='text/javascript' src='../wp-includes/js/dist/shortcode.js?ver=d6964e945049b6190adc8770cda168c4' id='wp-shortcode-js'></script>
+<script type='text/javascript' src='../wp-includes/js/dist/blocks.js?ver=70f0d7113c28590b968147e200d13a68' id='wp-blocks-js'></script>
+<script type='text/javascript' src='../wp-includes/js/dist/vendor/moment.js?ver=2.29.2' id='moment-js'></script>
+<script type='text/javascript' id='moment-js-after'>
+moment.updateLocale( 'en_US', {"months":["January","February","March","April","May","June","July","August","September","October","November","December"],"monthsShort":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"weekdaysShort":["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],"week":{"dow":1},"longDateFormat":{"LT":"g:i a","LTS":null,"L":null,"LL":"F j, Y","LLL":"F j, Y g:i a","LLLL":null}} );
+</script>
+<script type='text/javascript' src='../wp-includes/js/dist/date.js?ver=e0e02b3a1c7037e6cb893486d4680631' id='wp-date-js'></script>
+<script type='text/javascript' id='wp-date-js-after'>
+wp.date.setSettings( {"l10n":{"locale":"en_US","months":["January","February","March","April","May","June","July","August","September","October","November","December"],"monthsShort":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"weekdays":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"weekdaysShort":["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],"meridiem":{"am":"am","pm":"pm","AM":"AM","PM":"PM"},"relative":{"future":"%s from now","past":"%s ago"}},"formats":{"time":"g:i a","date":"F j, Y","datetime":"F j, Y g:i a","datetimeAbbreviated":"M j, Y g:i a"},"timezone":{"offset":"0","string":"","abbr":""}} );
+</script>
+<script type='text/javascript' src='../wp-includes/js/dist/primitives.js?ver=cadf5cfaabdb15c8c8fc440547afe919' id='wp-primitives-js'></script>
+<script type='text/javascript' src='../wp-includes/js/dist/rich-text.js?ver=e7d57502b62ec4756783a0cd79238841' id='wp-rich-text-js'></script>
+<script type='text/javascript' src='../wp-includes/js/dist/warning.js?ver=b9190af8fc6a3a48c580473c6f337b88' id='wp-warning-js'></script>
+<script type='text/javascript' src='../wp-includes/js/dist/components.js?ver=79d190e9af232aeaa59c1b40aa22932c' id='wp-components-js'></script>
+<script type='text/javascript' src='../wp-includes/js/dist/keyboard-shortcuts.js?ver=418fddac042f08102c4110f70e13cd47' id='wp-keyboard-shortcuts-js'></script>
+<script type='text/javascript' src='../wp-includes/js/dist/notices.js?ver=e44820c667bf205cacdfc48cbeb3c2e6' id='wp-notices-js'></script>
+<script type='text/javascript' src='../wp-includes/js/dist/token-list.js?ver=4ebce6423dfff99d40033fd33ce52cc9' id='wp-token-list-js'></script>
+<script type='text/javascript' src='../wp-includes/js/dist/wordcount.js?ver=fb8056c75aa0a0569f7ea3ceae97fbc6' id='wp-wordcount-js'></script>
+<script type='text/javascript' src='../wp-includes/js/dist/block-editor.js?ver=39c7981dd22ec80281080455892940e6' id='wp-block-editor-js'></script>
+<script type='text/javascript' src='../wp-includes/js/dist/core-data.js?ver=95df951bbac4c9f2fd2e6da80561595d' id='wp-core-data-js'></script>
+<script type='text/javascript' id='aislin-testimonials-app-js-extra'>
+/* <![CDATA[ */
+var aislin_testimonials = {"post_type":"page","thumbnail_sizes":{"thumbnail":"thumbnail","1536x1536":"1536x1536 (1536x1536)","2048x2048":"2048x2048 (2048x2048)","post-thumbnail":"post-thumbnail (150x150)","ed-school-featured-image":"ed-school-featured-image (990x500)","ed-school-medium":"ed-school-medium (768x510)","ed-school-medium-alt":"ed-school-medium-alt (768x410)","ed-school-square":"ed-school-square (768x768)","ed-school-square-small":"ed-school-square-small (420x420)","full-width":"full-width"},"rotator":{"transitions":["fade","fadeout","scrollHorz","scrollVert","flipHorz","flipVert","none"],"title_heading":["h1","h2","h3","h4","h5","h6","div","p"]}};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../app/plugins/aislin-testimonials/public/js/app.js?ver=5716d46101357ee0096ab88bc69197f1' id='aislin-testimonials-app-js'></script>
+<script type='text/javascript' id='contact-form-7-js-extra'>
+/* <![CDATA[ */
+var wpcf7 = {"api":{"root":"http:\/\/ed.aislinthemes.com\/modern\/wp-json\/","namespace":"contact-form-7\/v1"}};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../app/plugins/contact-form-7/includes/js/index.js?ver=5.5.2' id='contact-form-7-js'></script>
+<script type='text/javascript' src='../../app/plugins/revslider/public/assets/js/rbtools.min.js?ver=6.6.12' defer="" async="" id='tp-tools-js'></script>
+<script type='text/javascript' src='../../app/plugins/revslider/public/assets/js/rs6.min.js?ver=6.6.12' defer="" async="" id='revmin-js'></script>
+<script type='text/javascript' src='../../app/plugins/ed-school-plugin/includes/elementor/assets/js/jquery-parallax.js' id='jquery-parallax-js'></script>
+<script type='text/javascript' src='../../app/themes/ed-school/assets/js/plugins/fitvids.js' id='fitvids-js'></script>
+<script type='text/javascript' src='../../app/themes/ed-school/assets/js/plugins/superfish.js' id='jquery-superfish-js'></script>
+<script type='text/javascript' src='../../app/themes/ed-school/assets/js/plugins/hoverintent.js' id='hoverintent-js'></script>
+<script type='text/javascript' src='../../app/themes/ed-school/assets/js/plugins/scrollup.js' id='scrollup-js'></script>
+<script type='text/javascript' src='../../app/themes/ed-school/assets/js/plugins/jquery.sticky.js' id='jquery-sticky-js'></script>
+<script type='text/javascript' src='../../app/themes/ed-school/assets/js/plugins/natural-width-height.js' id='natural-width-height-js'></script>
+<script type='text/javascript' src='../../app/themes/ed-school/assets/js/plugins/fakeLoader.min.js' id='fakeLoader-js'></script>
+<script type='text/javascript' id='ed-school-scripts-js-extra'>
+/* <![CDATA[ */
+var wheels = {"siteName":"Modern","data":{"useScrollToTop":false,"useStickyMenu":true,"scrollToTopText":"","isAdminBarShowing":false,"initialWaypointScrollCompensation":"120","preloaderSpinner":0,"preloaderBgColor":"#ffffff"}};
+/* ]]> */
+</script>
+<script type='text/javascript' src='../../app/themes/ed-school/assets/js/wheels-main.min.js' id='ed-school-scripts-js'></script>
+<script src='../../app/plugins/the-events-calendar/common/src/resources/js/underscore-before.js'></script>
+<script type='text/javascript' src='../wp-includes/js/underscore.min.js?ver=1.13.3' id='underscore-js'></script>
+<script src='../../app/plugins/the-events-calendar/common/src/resources/js/underscore-after.js'></script>
+<script type='text/javascript' src='../../app/plugins/ed-school-plugin/includes/elementor/widgets/video-popup/assets/jquery.magnific-popup.min.js?ver=6.0' id='jquery.magnific-popup-js'></script>
+<script type='text/javascript' src='../../app/plugins/elementor/assets/js/webpack.runtime.js?ver=3.6.4' id='elementor-webpack-runtime-js'></script>
+<script type='text/javascript' src='../../app/plugins/elementor/assets/js/frontend-modules.js?ver=3.6.4' id='elementor-frontend-modules-js'></script>
+<script type='text/javascript' src='../../app/plugins/elementor/assets/lib/waypoints/waypoints.js?ver=4.0.2' id='elementor-waypoints-js'></script>
+<script type='text/javascript' src='../wp-includes/js/jquery/ui/core.js?ver=1.13.1' id='jquery-ui-core-js'></script>
+<script type='text/javascript' src='../../app/plugins/elementor/assets/lib/swiper/swiper.js?ver=5.3.6' id='swiper-js'></script>
+<script type='text/javascript' src='../../app/plugins/elementor/assets/lib/share-link/share-link.js?ver=3.6.4' id='share-link-js'></script>
+<script type='text/javascript' src='../../app/plugins/elementor/assets/lib/dialog/dialog.js?ver=4.9.0' id='elementor-dialog-js'></script>
+<script type='text/javascript' id='elementor-frontend-js-before'>
+var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false,"isScriptDebug":true},"i18n":{"shareOnFacebook":"Share on Facebook","shareOnTwitter":"Share on Twitter","pinIt":"Pin it","download":"Download","downloadImage":"Download image","fullscreen":"Fullscreen","zoom":"Zoom","share":"Share","playVideo":"Play Video","previous":"Previous","next":"Next","close":"Close"},"is_rtl":false,"breakpoints":{"xs":0,"sm":480,"md":768,"lg":1025,"xl":1440,"xxl":1600},"responsive":{"breakpoints":{"mobile":{"label":"Mobile","value":767,"default_value":767,"direction":"max","is_enabled":true},"mobile_extra":{"label":"Mobile Extra","value":880,"default_value":880,"direction":"max","is_enabled":false},"tablet":{"label":"Tablet","value":1024,"default_value":1024,"direction":"max","is_enabled":true},"tablet_extra":{"label":"Tablet Extra","value":1200,"default_value":1200,"direction":"max","is_enabled":false},"laptop":{"label":"Laptop","value":1366,"default_value":1366,"direction":"max","is_enabled":false},"widescreen":{"label":"Widescreen","value":2400,"default_value":2400,"direction":"min","is_enabled":false}}},"version":"3.6.4","is_static":false,"experimentalFeatures":{"e_import_export":true,"e_hidden_wordpress_widgets":true,"landing-pages":true,"elements-color-picker":true,"favorite-widgets":true,"admin-top-bar":true},"urls":{"assets":"http:\/\/ed.aislinthemes.com\/app\/plugins\/elementor\/assets\/"},"settings":{"page":[],"editorPreferences":[]},"kit":{"global_image_lightbox":"yes","active_breakpoints":["viewport_mobile","viewport_tablet"],"lightbox_enable_counter":"yes","lightbox_enable_fullscreen":"yes","lightbox_enable_zoom":"yes","lightbox_enable_share":"yes","lightbox_title_src":"title","lightbox_description_src":"description"},"post":{"id":151,"title":"Gallery%20%E2%80%93%20Modern","excerpt":"","featuredImage":false}};
+</script>
+<script type='text/javascript' src='../../app/plugins/elementor/assets/js/frontend.js?ver=3.6.4' id='elementor-frontend-js'></script>
+<script type='text/javascript' src='../../app/plugins/elementor/assets/js/preloaded-modules.js?ver=3.6.4' id='preloaded-modules-js'></script>
+</body>
+</html>
