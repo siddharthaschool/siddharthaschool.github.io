@@ -1,0 +1,149 @@
+<?xml version="1.0"?>
+<oembed><version>1.0</version><provider_name>Modern</provider_name><provider_url>http://ed.aislinthemes.com/modern</provider_url><author_name>aislin</author_name><author_url>http://ed.aislinthemes.com/modern/author/aislin/</author_url><title>Development of Skills Through Exploration of Heroes for All</title><type>rich</type><width>600</width><height>338</height><html>&lt;blockquote class="wp-embedded-content" data-secret="rg8hleImuh"&gt;&lt;a href="http://ed.aislinthemes.com/modern/classes/development-of-skills-through-exploration-of-heroes-for-all/"&gt;Development of Skills Through Exploration of Heroes for All&lt;/a&gt;&lt;/blockquote&gt;&lt;iframe sandbox="allow-scripts" security="restricted" src="http://ed.aislinthemes.com/modern/classes/development-of-skills-through-exploration-of-heroes-for-all/embed/#?secret=rg8hleImuh" width="600" height="338" title="&#x201C;Development of Skills Through Exploration of Heroes for All&#x201D; &#x2014; Modern" data-secret="rg8hleImuh" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" class="wp-embedded-content"&gt;&lt;/iframe&gt;&lt;script type="text/javascript"&gt;
+/**
+ * WordPress inline HTML embed
+ *
+ * @since 4.4.0
+ * @output wp-includes/js/wp-embed.js
+ *
+ * This file cannot have ampersands in it. This is to ensure
+ * it can be embedded in older versions of WordPress.
+ * See https://core.trac.wordpress.org/changeset/35708.
+ */
+(function ( window, document ) {
+	'use strict';
+
+	var supportedBrowser = false,
+		loaded = false;
+
+		if ( document.querySelector ) {
+			if ( window.addEventListener ) {
+				supportedBrowser = true;
+			}
+		}
+
+	/** @namespace wp */
+	window.wp = window.wp || {};
+
+	if ( !! window.wp.receiveEmbedMessage ) {
+		return;
+	}
+
+	/**
+	 * Receive embed message.
+	 *
+	 * @param {MessageEvent} e
+	 */
+	window.wp.receiveEmbedMessage = function( e ) {
+		var data = e.data;
+
+		if ( ! data ) {
+			return;
+		}
+
+		if ( ! ( data.secret || data.message || data.value ) ) {
+			return;
+		}
+
+		if ( /[^a-zA-Z0-9]/.test( data.secret ) ) {
+			return;
+		}
+
+		var iframes = document.querySelectorAll( 'iframe[data-secret="' + data.secret + '"]' ),
+			blockquotes = document.querySelectorAll( 'blockquote[data-secret="' + data.secret + '"]' ),
+			i, source, height, sourceURL, targetURL;
+
+		for ( i = 0; i &lt; blockquotes.length; i++ ) {
+			blockquotes[ i ].style.display = 'none';
+		}
+
+		for ( i = 0; i &lt; iframes.length; i++ ) {
+			source = iframes[ i ];
+
+			if ( e.source !== source.contentWindow ) {
+				continue;
+			}
+
+			source.removeAttribute( 'style' );
+
+			/* Resize the iframe on request. */
+			if ( 'height' === data.message ) {
+				height = parseInt( data.value, 10 );
+				if ( height &gt; 1000 ) {
+					height = 1000;
+				} else if ( ~~height &lt; 200 ) {
+					height = 200;
+				}
+
+				source.height = height;
+			}
+
+			/* Link to a specific URL on request. */
+			if ( 'link' === data.message ) {
+				sourceURL = document.createElement( 'a' );
+				targetURL = document.createElement( 'a' );
+
+				sourceURL.href = source.getAttribute( 'src' );
+				targetURL.href = data.value;
+
+				/* Only continue if link hostname matches iframe's hostname. */
+				if ( targetURL.host === sourceURL.host ) {
+					if ( document.activeElement === source ) {
+						window.top.location.href = data.value;
+					}
+				}
+			}
+		}
+	};
+
+	function onLoad() {
+		if ( loaded ) {
+			return;
+		}
+
+		loaded = true;
+
+		var isIE10 = -1 !== navigator.appVersion.indexOf( 'MSIE 10' ),
+			isIE11 = !!navigator.userAgent.match( /Trident.*rv:11\./ ),
+			iframes = document.querySelectorAll( 'iframe.wp-embedded-content' ),
+			iframeClone, i, source, secret;
+
+		for ( i = 0; i &lt; iframes.length; i++ ) {
+			/** @var {IframeElement} */
+			source = iframes[ i ];
+
+			secret = source.getAttribute( 'data-secret' );
+			if ( ! secret ) {
+				/* Add secret to iframe */
+				secret = Math.random().toString( 36 ).substr( 2, 10 );
+				source.src += '#?secret=' + secret;
+				source.setAttribute( 'data-secret', secret );
+			}
+
+			/* Remove security attribute from iframes in IE10 and IE11. */
+			if ( ( isIE10 || isIE11 ) ) {
+				iframeClone = source.cloneNode( true );
+				iframeClone.removeAttribute( 'security' );
+				source.parentNode.replaceChild( iframeClone, source );
+			}
+
+			/*
+			 * Let post embed window know that the parent is ready for receiving the height message, in case the iframe
+			 * loaded before wp-embed.js was loaded. When the ready message is received by the post embed window, the
+			 * window will then (re-)send the height message right away.
+			 */
+			source.contentWindow.postMessage( {
+				message: 'ready',
+				secret: secret
+			}, '*' );
+		}
+	}
+
+	if ( supportedBrowser ) {
+		window.addEventListener( 'message', window.wp.receiveEmbedMessage, false );
+		document.addEventListener( 'DOMContentLoaded', onLoad, false );
+		window.addEventListener( 'load', onLoad, false );
+	}
+})( window, document );
+&lt;/script&gt;
+</html><thumbnail_url>http://ed.aislinthemes.com/app/uploads/sites/4/2017/04/slider1.jpg</thumbnail_url><thumbnail_width>600</thumbnail_width><thumbnail_height>170</thumbnail_height></oembed>

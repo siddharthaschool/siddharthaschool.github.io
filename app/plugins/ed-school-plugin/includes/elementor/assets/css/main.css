@@ -1,0 +1,97 @@
+.sl-hover {
+    overflow: hidden;
+    padding: 0 4px;
+    height: 1em;
+    margin-bottom: 7px;
+}
+
+.sl-hover span {
+    position: relative;
+    display: inline-block;
+    -webkit-transition: -webkit-transform 0.3s;
+    -moz-transition: -moz-transform 0.3s;
+    transition: transform 0.3s;
+}
+
+.sl-hover span::before  {
+    position: absolute;
+    top: 100%;
+    content: attr(data-hover);
+    font-weight: 800;
+    -webkit-transform: translate3d(0,0,0);
+    -moz-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+}
+
+/* Tabs Stretched */
+
+.elementor-tabs-view-horizontal.stretched .elementor-tab-desktop-title.elementor-active:before,
+.elementor-tabs-view-horizontal.stretched .elementor-tab-desktop-title:hover:before {
+    content: "";
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    background-color: #fff;
+    top: -3px;
+    left: 0;
+}
+
+.elementor-tabs-view-horizontal.stretched .elementor-tab-desktop-title {
+    text-align: center;
+    background-color: #f39c15;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    border: 1px solid #e06d21;
+    border-left: 0;
+    padding: 20px;
+    transition: all 0.3s;
+}
+.elementor-tabs-view-horizontal.stretched .elementor-tab-desktop-title:first-child {
+    border-left: 1px solid #e06d21;
+}
+
+/* .elementor-tabs-view-horizontal.stretched .elementor-tabs-content-wrapper {
+    box-shadow: 0px 9px 9px 1px #e8e8e8;
+} */
+
+.elementor-tab-desktop-title:hover .sl-hover span,
+.elementor-tab-desktop-title:focus .sl-hover span {
+	-webkit-transform: translateY(-100%);
+	-moz-transform: translateY(-100%);
+	transform: translateY(-100%);
+}
+
+/* Desktop */
+
+@media (min-width: 768px) {
+
+    .elementor-tabs-view-horizontal.stretched .elementor-tabs-wrapper {
+        display: flex;
+        overflow: visible;
+    }
+    
+    .elementor-tabs-view-horizontal.stretched .elementor-tab-title a {
+        width: 100%;
+    }
+    
+    .elementor-tabs-view-horizontal.stretched .elementor-tab-title a em {
+        margin-bottom: 0;
+        font-size: 0.7em;
+        color: #ffffffcf;
+        font-style: normal;
+        display: block;
+    }
+
+}
+
+/* Mobile */
+.elementor-tab-mobile-title {
+    font-size: 16px !important;
+}
+.elementor-tab-mobile-title em {
+    display: none;
+}
+
+/*  End Tabs Stretched */
