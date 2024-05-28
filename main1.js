@@ -614,3 +614,26 @@ var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false
 }
 }
 customElements.define('my-footer', myFooter)
+
+class myFooter1 extends HTMLElement{
+
+connectedCallback()
+{
+alert("footer1 executed");
+	
+	//alert(31)
+this.innerHTML=`
+
+<footer1>
+				<p>© 2023 All Rights Reserved</p>					
+	</footer1>
+
+
+
+
+
+`
+
+}
+}
+customElements.define('my-footer1', myFooter1)
