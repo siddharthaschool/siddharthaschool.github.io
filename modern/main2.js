@@ -1,19 +1,9 @@
-//alert(1)
-
-function myFunction() {
-  document.getElementById("demo").innerHTML = "Paragraph changed.";
-}
-
-
-
-//alert(2)
-
 
 class myMarquee extends HTMLElement{
 
 connectedCallback()
 {
-//alert("marquee executed");
+//alert("marquee2 executed");
 	
 	//alert(31)
 this.innerHTML=`
@@ -50,47 +40,46 @@ this.innerHTML=`
 
 	
 	<header>	
-			
-		
-		
-		
-						<ul id="menu-main-menu-1" class="sf-menu wh-menu-main left">
-			<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-1530 current_page_item menu-item-2396 msm-top-level-item"><a href="index.htm" aria-current="page">Home</a></li>
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-1530 current_page_item menu-item-2396 msm-top-level-item"><a href="modern/about-us/index.htm">About Us</a>
-</li>
-
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-1530 current_page_item menu-item-2396 msm-top-level-item"><a href="modern/teachers-page/index.htm">Teacher</a>
-</li>
-
-
-
-
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-1530 current_page_item menu-item-2396 msm-top-level-item"><a href="modern/alumni/index.htm">Alumni</a>
-</li>
-
-
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-1530 current_page_item menu-item-2396 msm-top-level-item"><a href="modern/gallery/index.htm">Gallery</a>
-</li>
-
-
-
-<li class="menu-item menu-item-type-post_type_archive menu-item-object-tribe_events menu-item-has-children menu-item-2632 msm-top-level-item"><a href="modern/student/index.htm">Student</a>
-<ul class="sub-menu">
-	<li class="menu-item menu-item-type-post_type_archive menu-item-object-tribe_events menu-item-2631"><a href="modern/uniforms/index.htm">Uniforms</a></li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-tribe_events menu-item-1706"><a href="modern/schoolhours/index.htm">School Hours</a></li>
 	
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2618"><a href="modern/academiccalender/index.htm">Academic Calender</a></li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-teacher menu-item-1742"><a href="modern/holidays/index.htm">Holidays</a></li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2618"><a href="modern/studentcodeofconduct/index.htm">Student Code of Conduct</a></li>
+	
+	
+						<ul id="menu-main-menu-1" class="sf-menu wh-menu-main left">
+			<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-1530 current_page_item menu-item-2396 msm-top-level-item"><a href="../../index.htm" aria-current="page">Home</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-1530 current_page_item menu-item-2396 msm-top-level-item"><a href="../about-us/index.htm">About Us</a>
+</li>
 
-
-</ul>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-1530 current_page_item menu-item-2396 msm-top-level-item"><a href="../teachers-page/index.htm">Teacher</a>
 </li>
 
 
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1748 msm-top-level-item"><a href="modern/academiccalender/index.htm">Events</a>
+
+
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-1530 current_page_item menu-item-2396 msm-top-level-item"><a href="../alumni/index.htm">Alumni</a>
+</li>
+
+
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-1530 current_page_item menu-item-2396 msm-top-level-item"><a href="../gallery/index.htm">Gallery</a>
+</li>
+
+
+
+<li class="menu-item menu-item-type-post_type_archive menu-item-object-tribe_events menu-item-has-children menu-item-2632 msm-top-level-item"><a href="../student/index.htm">Student</a>
 <ul class="sub-menu">
-	<li class="menu-item menu-item-type-post_type_archive menu-item-object-tribe_events menu-item-2631"><a href="modern/previousevents/index.htm">Previous Events</a></li>
+	<li class="menu-item menu-item-type-post_type_archive menu-item-object-tribe_events menu-item-2631"><a href="../uniforms/index.htm">Uniforms</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-tribe_events menu-item-1706"><a href="../schoolhours/index.htm">School Hours</a></li>
+	
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2618"><a href="../academiccalender/index.htm">Academic Calender</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-teacher menu-item-1742"><a href="../holidays/index.htm">Holidays</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2618"><a href="../studentcodeofconduct/index.htm">Student Code of Conduct</a></li>
+
+
+</ul>
+</li>
+
+
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1748 msm-top-level-item"><a href="../academiccalender/index.htm">Events</a>
+<ul class="sub-menu">
+	<li class="menu-item menu-item-type-post_type_archive menu-item-object-tribe_events menu-item-2631"><a href="../previousevents/index.htm">Previous Events</a></li>
 </ul>
 
 </li>
@@ -98,7 +87,7 @@ this.innerHTML=`
 
 
 
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2383 msm-top-level-item msm-menu-item menu-item-has-children msm-hover"><a href="modern/contact/index.htm">Contact</a><!-- Contact Submenu --><div class="msm-submenu" data-depth="0" data-width="1140" data-position="center">
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2383 msm-top-level-item msm-menu-item menu-item-has-children msm-hover"><a href="../contact/index.htm">Contact</a><!-- Contact Submenu --><div class="msm-submenu" data-depth="0" data-width="1140" data-position="center">
 		<div data-elementor-type="wp-post" data-elementor-id="1848" class="elementor elementor-1848">
 						<div class="elementor-inner">
 				<div class="elementor-section-wrap">
@@ -171,7 +160,7 @@ this.innerHTML=`
 				<div class="elementor-element elementor-element-081e13c elementor-align-center hoverable elementor-widget elementor-widget-button" data-id="081e13c" data-element_type="widget" data-widget_type="button.default">
 				<div class="elementor-widget-container">
 					<div class="elementor-button-wrapper">
-			<a href="modern/contact/index.htm" class="elementor-button-link elementor-button elementor-size-sm" role="button">
+			<a href="../contact/index.htm" class="elementor-button-link elementor-button elementor-size-sm" role="button">
 						<span class="elementor-button-content-wrapper">
 						<span class="elementor-button-text">DIRECT CONTACT</span>
 		</span>
@@ -191,6 +180,12 @@ this.innerHTML=`
 		</div>
 </li>
 </ul>
+	
+	
+			
+		
+		
+						
 		
 
 	</header>
@@ -253,46 +248,48 @@ connectedCallback()
 //alert(21)
 
 
-//alert("header executed");	
+//alert("header1 executed");	
 this.innerHTML=`
 
 <header>
 	
 	
-									
-		<ul id="menu-mobile-menu-1" class="respmenu">
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-1530 current_page_item menu-item-2395 msm-top-level-item"><a href="index.htm" aria-current="page">Home</a></li>
+	
+	
+	
+	<ul id="menu-mobile-menu-1" class="respmenu">
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-1530 current_page_item menu-item-2395 msm-top-level-item"><a href="../../index.htm" aria-current="page">Home</a></li>
 
 	
 	
 	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1887 msm-top-level-item">
-<a href="modern/about-us/index.htm">About Us</a>
+<a href="../about-us/index.htm">About Us</a>
 
 </li>
 
 
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1906"><a href="modern/teachers-page/index.htm">Teachers</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1906"><a href="../teachers-page/index.htm">Teachers</a></li>
 
 	
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1889 msm-top-level-item"><a href="modern/alumni/index.htm">Alumni</a>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1889 msm-top-level-item"><a href="../alumni/index.htm">Alumni</a>
 </li>
 	
 
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1889 msm-top-level-item"><a href="modern/gallery/index.htm">Gallery</a>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1889 msm-top-level-item"><a href="../gallery/index.htm">Gallery</a>
 </li>
 
 	
 
 <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1887 msm-top-level-item">
-<a href="modern/student/index.htm">Student</a>
+<a href="../student/index.htm">Student</a>
 <div class="respmenu-submenu-toggle cbp-respmenu-more"><i class="icon-edright-arrow"></i></div>
 
 <ul class="sub-menu">
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1906"><a href="modern/uniforms/index.htm">Uniforms</a></li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1905"><a href="modern/schoolhours/index.htm">School Hours</a></li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1905"><a href="modern/academiccalender/index.htm">Academic Calender</a></li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1905"><a href="modern/holidays/index.htm">Holidays</a></li>
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1905"><a href="modern/studentcodeofconduct/index.htm">Student Code of Conduct</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1906"><a href="../uniforms/index.htm">Uniforms</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1905"><a href="../schoolhours/index.htm">School Hours</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1905"><a href="../academiccalender/index.htm">Academic Calender</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1905"><a href="../holidays/index.htm">Holidays</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1905"><a href="../studentcodeofconduct/index.htm">Student Code of Conduct</a></li>
 </ul>
 </li>
 
@@ -300,21 +297,25 @@ this.innerHTML=`
 
 
 <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1887 msm-top-level-item">
-<a href="modern/academiccalender/index.htm">Events</a>
+<a href="../academiccalender/index.htm">Events</a>
 <div class="respmenu-submenu-toggle cbp-respmenu-more"><i class="icon-edright-arrow"></i></div>
 
 <ul class="sub-menu">
-	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1906"><a href="modern/previousevents/index.htm">Previous Events</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1906"><a href="../previousevents/index.htm">Previous Events</a></li>
 </ul>
 </li>
 
 
 
 
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2382 msm-top-level-item"><a href="modern/contact/index.htm">Contact</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2382 msm-top-level-item"><a href="../contact/index.htm">Contact</a></li>
 
 
 </ul>
+
+	
+									
+	
 
 
 
