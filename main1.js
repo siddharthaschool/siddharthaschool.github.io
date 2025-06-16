@@ -13,7 +13,9 @@ class myMarquee extends HTMLElement{
 
 connectedCallback()
 {
-//alert("marquee executed");
+//alert("marquee executed");<marquee class="blink" bgcolor="#66b2ff">Admissions Open From PRE-KG to VIII std.</marquee>	
+ 
+
 	
 	//alert(31)
 this.innerHTML=`
@@ -22,7 +24,8 @@ this.innerHTML=`
 
 	
 
-<marquee class="blink" bgcolor="#66b2ff">Admissions Open From PRE-KG to VIII std.</marquee>	
+ 
+ <marquee class="blink" bgcolor="#66b2ff">Founders Day <a class="blink" href="https://www.youtube.com/watch?v=eSKSxS35oFo">Click Here</a></marquee>	
 	
 	
 	</header>
