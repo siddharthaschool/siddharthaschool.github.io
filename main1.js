@@ -28,9 +28,8 @@ this.innerHTML=`
 
 	
 
- <marquee class="blink" bgcolor="#66b2ff">Admissions Open From PRE-KG to VIII std.            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Founder's Day <a class="blink" href="https://www.youtube.com/watch?v=eSKSxS35oFo">Click Here</a></marquee>
- <marquee class="blink" bgcolor="#66b2ff"></marquee>	
-	
+<marquee class="blink" bgcolor="#66b2ff">Admissions Open From PRE-KG to VIII std.            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Founder's Day <a class="blink" href="https://www.youtube.com/watch?v=eSKSxS35oFo">Click Here</a></marquee>
+  	
 	
 	</header>
 
