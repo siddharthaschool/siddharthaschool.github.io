@@ -1,4 +1,11 @@
 
+
+
+
+
+
+
+
 class myMarquee extends HTMLElement{
 
 connectedCallback()
