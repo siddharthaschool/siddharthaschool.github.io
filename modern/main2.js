@@ -88,7 +88,7 @@ this.innerHTML=`
 </li>
 
 
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1748 msm-top-level-item"><a href="../academiccalender/index.htm">Events</a>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1748 msm-top-level-item"><a href="../events/index.htm">Events</a>
 <ul class="sub-menu">
 	<li class="menu-item menu-item-type-post_type_archive menu-item-object-tribe_events menu-item-2631"><a href="../previousevents/index.htm">Previous Events</a></li>
 </ul>
@@ -102,7 +102,7 @@ this.innerHTML=`
 		<div data-elementor-type="wp-post" data-elementor-id="1848" class="elementor elementor-1848">
 						<div class="elementor-inner">
 				<div class="elementor-section-wrap">
-									<section class="elementor-section elementor-top-section elementor-element elementor-element-f237c8f elementor-section-full_width elementor-section-height-default elementor-section-height-default" data-id="f237c8f" data-element_type="section">
+									<!-- <section class="elementor-section elementor-top-section elementor-element elementor-element-f237c8f elementor-section-full_width elementor-section-height-default elementor-section-height-default" data-id="f237c8f" data-element_type="section">
 						<div class="elementor-container elementor-column-gap-default">
 							<div class="elementor-row">
 					<div class="elementor-column elementor-col-25 elementor-top-column elementor-element elementor-element-d184153" data-id="d184153" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
@@ -184,7 +184,7 @@ this.innerHTML=`
 		</div>
 								</div>
 					</div>
-		</section>
+		</section> -->
 									</div>
 			</div>
 					</div>
@@ -308,7 +308,7 @@ this.innerHTML=`
 
 
 <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1887 msm-top-level-item">
-<a href="../academiccalender/index.htm">Events</a>
+<a href="../events/index.htm">Events</a>
 <div class="respmenu-submenu-toggle cbp-respmenu-more"><i class="icon-edright-arrow"></i></div>
 
 <ul class="sub-menu">

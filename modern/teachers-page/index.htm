@@ -1,5 +1,97 @@
 ﻿<!DOCTYPE html>
 <html class="no-js" lang="en-US">
+<!-- Notification Bar Widget -->
+<div id="notification-widget-container"></div>
+<script>
+(function() {
+  console.log('Notification widget script starting...');
+  
+  // Prevent multiple widget loads
+  if (document.getElementById('notification-widget-iframe')) {
+    console.log('Widget already loaded, skipping...');
+    return;
+  }
+  
+  var container = document.getElementById('notification-widget-container');
+  if (!container) {
+    console.error('Container element with id "notification-widget-container" not found!');
+    console.log('Make sure you have this div in your HTML: <div id="notification-widget-container"></div>');
+    return;
+  }
+  
+  console.log('Container found, creating iframe...');
+  
+  // Create iframe
+  var iframe = document.createElement('iframe');
+  iframe.id = 'notification-widget-iframe';
+  iframe.src = 'https://sticky-header-scribe.lovable.app/widget?message=%F0%9F%8E%89%20Admissions%20Open%20From%20PRE-KG%20to%20VIII%20std.%20%3Ca%20href%3D%22https%3A%2F%2Fyoutu.be%2FkEaRABCpXIY%3Fsi%3DwuK2TYfirFMzHwRI%22%3E%3Cu%3EMore%20Details%3C%2Fu%3E%3C%2Fa%3E&visible=true';
+  iframe.style.cssText = 'width:100%;height:60px;border:none;margin:0;padding:0;display:block;position:fixed;top:0;left:0;right:0;z-index:999999;background:transparent;';
+  iframe.setAttribute('scrolling', 'no');
+  iframe.setAttribute('frameborder', '0');
+  iframe.setAttribute('allowtransparency', 'true');
+  iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin');
+  
+  console.log('Iframe created with src:', iframe.src);
+  
+  // Show/hide based on visibility setting
+  if (!true) {
+    iframe.style.display = 'none';
+    console.log('Widget set to hidden via visibility setting');
+  } else {
+    // Add body padding when visible
+    if (document.body) {
+      document.body.style.paddingTop = '60px';
+      document.body.style.transition = 'padding-top 0.3s ease';
+    }
+    console.log('Widget visible, added body padding');
+  }
+  
+  // Handle messages from iframe
+  function handleWidgetMessage(event) {
+    // Verify origin for security
+    if (event.origin !== 'https://sticky-header-scribe.lovable.app') {
+      console.log('Message from unauthorized origin:', event.origin);
+      return;
+    }
+    
+    console.log('Received message from widget:', event.data);
+    
+    if (event.data && event.data.type === 'widget-close') {
+      console.log('Widget close requested');
+      iframe.style.display = 'none';
+      if (document.body) {
+        document.body.style.paddingTop = '0px';
+      }
+    }
+    
+    if (event.data && event.data.type === 'widget-ready') {
+      console.log('Widget ready, height:', event.data.height);
+    }
+  }
+  
+  // Add event listener
+  if (window.addEventListener) {
+    window.addEventListener('message', handleWidgetMessage, false);
+  } else if (window.attachEvent) {
+    window.attachEvent('onmessage', handleWidgetMessage);
+  }
+  
+  // Error handling
+  iframe.onload = function() {
+    console.log('Iframe loaded successfully');
+  };
+  
+  iframe.onerror = function() {
+    console.error('Failed to load notification widget iframe');
+  };
+  
+  // Append iframe to container
+  container.appendChild(iframe);
+  console.log('Iframe appended to container');
+  
+})();
+</script>
+
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,7 +125,7 @@
             }
             
         </style>				
-	<my-marquee></my-marquee>
+	<!-- <my-marquee></my-marquee -->>
 	
 			
 		</section>
@@ -630,7 +722,7 @@ var msm_mega_submenu = {"data":{"submenu_items_position_relative":0,"mobile_menu
 					<div class="vc_row scp-teachers scp-teachers-4 ">
 							<div class="teacher one fourth wh-padding">
 					<div class="thumbnail">
-						<img width="768" height="768" src="../../app/uploads/sites/4/2017/02/2-768x768.jpeg" class="attachment-ed-school-square size-ed-school-square wp-post-image" alt="" loading="lazy" srcset="../../app/uploads/sites/4/2017/02/2.jpeg 768w, ../../app/uploads/sites/4/2017/02/2-150x150.jpeg 150w, ../../app/uploads/sites/4/2017/02/2-300x300.jpeg 300w" sizes="(max-width: 768px) 100vw, 768px"></a>					</div>
+						<img width="768" height="768" src="../../app/uploads/sites/4/2017/02/2-768x768.jpg" class="attachment-ed-school-square size-ed-school-square wp-post-image" alt="" loading="lazy" srcset="../../app/uploads/sites/4/2017/02/2.jpg 768w, ../../app/uploads/sites/4/2017/02/2-150x150.jpg 150w, ../../app/uploads/sites/4/2017/02/2-300x300.jpg 300w" sizes="(max-width: 768px) 100vw, 768px"></a>					</div>
 							<div class="item">
 						<h5 class="entry-title">Mrs. V. Bharathi M. Sc., B. Ed.,</h5>
 																			<h6 class="job-title">Principal</h6>
@@ -657,9 +749,9 @@ var msm_mega_submenu = {"data":{"submenu_items_position_relative":0,"mobile_menu
 				</div>
 							<div class="teacher one fourth wh-padding">
 					<div class="thumbnail">
-				<img width="768" height="768" src="../../app/uploads/sites/4/2017/02/4-768x768.jpeg" class="attachment-ed-school-square size-ed-school-square wp-post-image" alt="" loading="lazy" srcset="../../app/uploads/sites/4/2017/02/4.jpeg 768w, ../../app/uploads/sites/4/2017/02/4-150x150.jpeg 150w, ../../app/uploads/sites/4/2017/02/4-300x300.jpeg 300w" sizes="(max-width: 768px) 100vw, 768px"></a>					</div>
+				<img width="768" height="768" src="../../app/uploads/sites/4/2017/02/6-768x768.jpeg" class="attachment-ed-school-square size-ed-school-square wp-post-image" alt="" loading="lazy" srcset="../../app/uploads/sites/4/2017/02/6.jpeg 768w, ../../app/uploads/sites/4/2017/02/6-150x150.jpeg 150w, ../../app/uploads/sites/4/2017/02/6-300x300.jpeg 300w" sizes="(max-width: 768px) 100vw, 768px"></a>					</div>
 							<div class="item">
-						<h5 class="entry-title">Mrs. Swathi Jayachandran, B. Sc., B. Ed.,</h5>
+						<h5 class="entry-title">Mrs. S, B. Sc., B. Ed.,</h5>
 																			<h6 class="job-title">Headmistress (Main Campus)</h6>
 																									<div class="summary"><p>As Headmistress of siddhartha school feel honoured to guide young learners in their formative years. Our focus is on building strong foundations through care, discipline, and joyful learning.</p>
 																									<p>We aim to shape confident, kind, and curious individuals ready to face the future.</p>
@@ -672,9 +764,9 @@ var msm_mega_submenu = {"data":{"submenu_items_position_relative":0,"mobile_menu
 				
 					<div class="teacher one fourth wh-padding">
 					<div class="thumbnail">
-				<img width="768" height="768" src="../../app/uploads/sites/4/2017/02/4-768x768.jpeg" class="attachment-ed-school-square size-ed-school-square wp-post-image" alt="" loading="lazy" srcset="../../app/uploads/sites/4/2017/02/4.jpeg 768w, ../../app/uploads/sites/4/2017/02/4-150x150.jpeg 150w, ../../app/uploads/sites/4/2017/02/4-300x300.jpeg 300w" sizes="(max-width: 768px) 100vw, 768px"></a>					</div>
+				<img width="768" height="768" src="../../app/uploads/sites/4/2017/02/7-768x768.jpeg" class="attachment-ed-school-square size-ed-school-square wp-post-image" alt="" loading="lazy" srcset="../../app/uploads/sites/4/2017/02/7.jpeg 768w, ../../app/uploads/sites/4/2017/02/7-150x150.jpeg 150w, ../../app/uploads/sites/4/2017/02/7-300x300.jpeg 300w" sizes="(max-width: 768px) 100vw, 768px"></a>					</div>
 							<div class="item">
-						<h5 class="entry-title">Mrs. Swathi Jayachandran, B. Sc., B. Ed.,</h5>
+						<h5 class="entry-title">Ms. S, B. Sc., B. Ed.,</h5>
 																			<h6 class="job-title">Headmistress (City Campus)</h6>
 																									<div class="summary"><p>It is with great pride and pleasure that I serve as the Headmistress of this vibrant institution, where every child is valued, nurtured, and encouraged to grow into a confident, responsible, and compassionate individual. At [School Name], we believe that education is not just about academic excellence—it is about building character, instilling values, and preparing our children to thrive in a rapidly changing world.</p>
 </div>
@@ -757,7 +849,7 @@ var msm_mega_submenu = {"data":{"submenu_items_position_relative":0,"mobile_menu
 				 -->
 					<div class="teacher one fourth wh-padding">
 					<div class="thumbnail">
-				<img width="768" height="768" src="../../app/uploads/sites/4/2017/02/5-768x768.jpeg" class="attachment-ed-school-square size-ed-school-square wp-post-image" alt="" loading="lazy" srcset="../../app/uploads/sites/4/2017/02/5.jpeg 768w, ../../app/uploads/sites/4/2017/02/5-150x150.jpeg 150w, ../../app/uploads/sites/4/2017/02/5-300x300.jpeg 300w" sizes="(max-width: 768px) 100vw, 768px"></a>					</div>			<div class="item">
+				<img width="768" height="768" src="../../app/uploads/sites/4/2017/02/5-768x768.jpg" class="attachment-ed-school-square size-ed-school-square wp-post-image" alt="" loading="lazy" srcset="../../app/uploads/sites/4/2017/02/5.jpg 768w, ../../app/uploads/sites/4/2017/02/5-150x150.jpg 150w, ../../app/uploads/sites/4/2017/02/5-300x300.jpg 300w" sizes="(max-width: 768px) 100vw, 768px"></a>					</div>			<div class="item">
 						<h5 class="entry-title">Ms. Kalaiarasi., MBA., D. T. O., PGDCA.,</h5>
 																			<h6 class="job-title">Administrative Officer</h6>
 																									<div class="summary"><p>siddhartha we ensure smooth and efficient administration to support the academic and developmental goals of our students. My role is to coordinate operations, maintain a safe environment, and assist in creating a positive experience for all—students, parents, and staff.Together, we work towards a well-managed, student-friendly campus.</p>

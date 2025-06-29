@@ -1,5 +1,97 @@
 ﻿<!DOCTYPE html>
 <html class="no-js" lang="en-US">
+<!-- Notification Bar Widget -->
+<div id="notification-widget-container"></div>
+<script>
+(function() {
+  console.log('Notification widget script starting...');
+  
+  // Prevent multiple widget loads
+  if (document.getElementById('notification-widget-iframe')) {
+    console.log('Widget already loaded, skipping...');
+    return;
+  }
+  
+  var container = document.getElementById('notification-widget-container');
+  if (!container) {
+    console.error('Container element with id "notification-widget-container" not found!');
+    console.log('Make sure you have this div in your HTML: <div id="notification-widget-container"></div>');
+    return;
+  }
+  
+  console.log('Container found, creating iframe...');
+  
+  // Create iframe
+  var iframe = document.createElement('iframe');
+  iframe.id = 'notification-widget-iframe';
+  iframe.src = 'https://sticky-header-scribe.lovable.app/widget?message=%F0%9F%8E%89%20Admissions%20Open%20From%20PRE-KG%20to%20VIII%20std.%20%3Ca%20href%3D%22https%3A%2F%2Fyoutu.be%2FkEaRABCpXIY%3Fsi%3DwuK2TYfirFMzHwRI%22%3E%3Cu%3EMore%20Details%3C%2Fu%3E%3C%2Fa%3E&visible=true';
+  iframe.style.cssText = 'width:100%;height:60px;border:none;margin:0;padding:0;display:block;position:fixed;top:0;left:0;right:0;z-index:999999;background:transparent;';
+  iframe.setAttribute('scrolling', 'no');
+  iframe.setAttribute('frameborder', '0');
+  iframe.setAttribute('allowtransparency', 'true');
+  iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin');
+  
+  console.log('Iframe created with src:', iframe.src);
+  
+  // Show/hide based on visibility setting
+  if (!true) {
+    iframe.style.display = 'none';
+    console.log('Widget set to hidden via visibility setting');
+  } else {
+    // Add body padding when visible
+    if (document.body) {
+      document.body.style.paddingTop = '60px';
+      document.body.style.transition = 'padding-top 0.3s ease';
+    }
+    console.log('Widget visible, added body padding');
+  }
+  
+  // Handle messages from iframe
+  function handleWidgetMessage(event) {
+    // Verify origin for security
+    if (event.origin !== 'https://sticky-header-scribe.lovable.app') {
+      console.log('Message from unauthorized origin:', event.origin);
+      return;
+    }
+    
+    console.log('Received message from widget:', event.data);
+    
+    if (event.data && event.data.type === 'widget-close') {
+      console.log('Widget close requested');
+      iframe.style.display = 'none';
+      if (document.body) {
+        document.body.style.paddingTop = '0px';
+      }
+    }
+    
+    if (event.data && event.data.type === 'widget-ready') {
+      console.log('Widget ready, height:', event.data.height);
+    }
+  }
+  
+  // Add event listener
+  if (window.addEventListener) {
+    window.addEventListener('message', handleWidgetMessage, false);
+  } else if (window.attachEvent) {
+    window.attachEvent('onmessage', handleWidgetMessage);
+  }
+  
+  // Error handling
+  iframe.onload = function() {
+    console.log('Iframe loaded successfully');
+  };
+  
+  iframe.onerror = function() {
+    console.error('Failed to load notification widget iframe');
+  };
+  
+  // Append iframe to container
+  container.appendChild(iframe);
+  console.log('Iframe appended to container');
+  
+})();
+</script>
+
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -29,8 +121,8 @@
             }
             
         </style>				
-	<my-marquee></my-marquee>
-	
+	<!-- <my-marquee></my-marquee>
+	 -->
 			
 		</section>
 
@@ -606,96 +698,164 @@ var msm_mega_submenu = {"data":{"submenu_items_position_relative":0,"mobile_menu
 
 <div class="cbp-row wh-content">
 	<div class="cbp-container">
-		<div class="three fourths wh-padding wh-content-inner">
-				
-				<section class="wpb-content-wrapper">
-				
-<!-- <div class="vc_tta-container" data-vc-action="collapse">
-<div class="vc_general vc_tta vc_tta-tabs vc_tta-color-blue vc_tta-style-flat vc_tta-shape-square vc_tta-spacing-2  wh-custom-tabs vc_tta-o-no-fill vc_tta-tabs-position-top vc_tta-controls-align-left">
-<div class="vc_tta-tabs-container">
-<ul class="vc_tta-tabs-list">
-<li class="vc_tta-tab vc_active" data-vc-tab><a href="#1487596796925-637e0a36-dabc" data-vc-tabs data-vc-container=".vc_tta">
-<span class="vc_tta-title-text">Monday ( March Past - Class wise)</span></a></li>
-<li class="vc_tta-tab" data-vc-tab><a href="#1487596796999-c4291c1c-d489" data-vc-tabs data-vc-container=".vc_tta">
-<span class="vc_tta-title-text">Tuesday To Friday</span></a></li>
-<li class="vc_tta-tab" data-vc-tab><a href="#1487598336060-a72ddeb1-8bcd" data-vc-tabs data-vc-container=".vc_tta">
-<span class="vc_tta-title-text">Saturday ( March Past - House wise)</span></a></li>
-</ul></div>
-<div class="vc_tta-panels-container"><div class="vc_tta-panels">
-<div class="vc_tta-panel vc_active" id="1487596796925-637e0a36-dabc" data-vc-content=".vc_tta-panel-body">
-<div class="vc_tta-panel-heading">
-<h4 class="vc_tta-panel-title"><a href="#1487596796925-637e0a36-dabc" data-vc-accordion data-vc-container=".vc_tta-container">
-<span class="vc_tta-title-text">Monday ( March Past - Class wise)</span></a></h4></div>
-<div class="vc_tta-panel-body"><div class="vc_row wpb_row vc_inner vc_row-fluid">
-<div class="wpb_column vc_column_container vc_col-sm-6"><div class="vc_column-inner vc_custom_1487850585695">
-<div class="wpb_wrapper">
-					<div class="wh-theme-icon vc_custom_1487079174674  scp_theme_icon-a21b78d7248bbb9a7a0fd3a4b079a3e1">
-			</div>
-	<div class="wpb_text_column wpb_content_element  vc_custom_1489052314148" >
-		<div class="wpb_wrapper">
-			<h4>For Boys</h4>
-<p>Full White Unifrom, White Shoes, White Socks, Blue Tie &amp; Blue Belt</p>
-<h4>For Girls</h4>
-<p>Full White Unifrom, with school Badge or Blue Belt, White Shoes and White Socks.</p>
+		<div class="entry-content one whole wh-padding">
+						<div data-elementor-type="wp-post" data-elementor-id="151" class="elementor elementor-151">
+						<div class="elementor-inner">
+				<div class="elementor-section-wrap">
+
+
 
 
 			
-			
-			
-			
-		</div>
-	</div>
-</div></div></div></div></div></div>
 
-
-
-
-<div class="vc_tta-panel" id="1487596796999-c4291c1c-d489" data-vc-content=".vc_tta-panel-body"><div class="vc_tta-panel-heading"><h4 class="vc_tta-panel-title"><a href="#1487596796999-c4291c1c-d489" data-vc-accordion data-vc-container=".vc_tta-container"><span class="vc_tta-title-text">Assignments</span></a></h4></div><div class="vc_tta-panel-body"><div class="vc_row wpb_row vc_inner vc_row-fluid"><div class="wpb_column vc_column_container vc_col-sm-6"><div class="vc_column-inner vc_custom_1487850585695"><div class="wpb_wrapper">
-					<div class="wh-theme-icon vc_custom_1487079174674  scp_theme_icon-a21b78d7248bbb9a7a0fd3a4b079a3e1">
-			</div>
-	<div class="wpb_text_column wpb_content_element  vc_custom_1489052314148" >
-		<div class="wpb_wrapper">
-
-			<h4>For Boys</h4>
-<p>Nursery to VII std : Navy Blue Shorts and White Shirt (Half Sleeves) Blue tie, Blue belt, Black Shoes &amp; White Socks with Blue Stripes.</p>
-<h4>For Girls</h4>
-<p>Nursery to VIII std : Navy Blue Skirt, White Shirt (Half Sleeves), Blue Tie, Blue Belt, Black Shoes and White Socks with Blue Stripes and School Badge.<br />
-<strong>Hair : Double Plaits with White Ribbons</strong></p>
-
-			
-			
-			
-	</div></div>
-</div></div></div></div></div></div>
-
-
-
-<div class="vc_tta-panel" id="1487598336060-a72ddeb1-8bcd" data-vc-content=".vc_tta-panel-body"><div class="vc_tta-panel-heading"><h4 class="vc_tta-panel-title"><a href="#1487598336060-a72ddeb1-8bcd" data-vc-accordion data-vc-container=".vc_tta-container"><span class="vc_tta-title-text">Information</span></a></h4></div><div class="vc_tta-panel-body"><div class="vc_row wpb_row vc_inner vc_row-fluid"><div class="wpb_column vc_column_container vc_col-sm-6"><div class="vc_column-inner vc_custom_1487850585695"><div class="wpb_wrapper">
-				
-	<div class="wpb_text_column wpb_content_element  vc_custom_1489052314148" >
-		<div class="wpb_wrapper">
-			
-<h4>For Boys</h4>
-<p>T-Shirt, White Shorts / Pants, Blue Belt, White Shoes, White Socks with Colour Stripes.</p>
-<h4>For Girls</h4>
-<p>T-Shirts, White Socks with Colour Stripes, Badge, White Shoes &amp; White Socks with Colour Stripes.</p>
-		</div>
-	</div>
-</div></div></div></div></div></div>
- -->
 
 
 
 
 <h5>Our alumni are an integral part of our school’s legacy. They carry forward the values, knowledge, and spirit of siddhartha into  the world, making a difference in diverse fields across the globe. This platform celebrates their achievements, fosters connections, and strengthens the bond between past and present students.We invite our alumni to stay connected, share their journeys, and contribute to the continued growth of our school community
 </h5>
+
+
+
+<section class="elementor-section elementor-top-section elementor-element elementor-element-5617487b elementor-section-boxed elementor-section-height-default elementor-section-height-default" data-id="5617487b" data-element_type="section">
+						<div class="elementor-container elementor-column-gap-no">
+							<div class="elementor-row">
+					<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-794150b" data-id="794150b" data-element_type="column">
+			<div class="elementor-column-wrap elementor-element-populated">
+							<div class="elementor-widget-wrap">
+						<div class="elementor-element elementor-element-d458c89 gallery-spacing-custom elementor-widget elementor-widget-image-gallery" data-id="d458c89" data-element_type="widget" data-widget_type="image-gallery.default">
+				<div class="elementor-widget-container">
+					<div class="elementor-image-gallery">
 			
+		<style type="text/css">
+			#gallery-1 {
+				margin: auto;
+			}
+			#gallery-1 .gallery-item {
+				float: left;
+				margin-top: 10px;
+				text-align: center;
+				width: 33%;
+			}
+			#gallery-1 img {
+				border: 2px solid #cfcfcf;
+			}
+			#gallery-1 .gallery-caption {
+				margin-left: 0;
+			}
+			/* see gallery_shortcode() in wp-includes/media.php */
+		</style>
+		<div id='gallery-1' class='gallery galleryid-151 gallery-columns-3 gallery-size-ed-school-medium-alt'>
+		
+					
+			<dl class='gallery-item'>
+			<dt class='gallery-icon landscape'>
+				<a data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="d458c89" data-elementor-lightbox-title="41" e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjQsInVybCI6Imh0dHA6XC9cL2VkLmFpc2xpbnRoZW1lcy5jb21cL2FwcFwvdXBsb2Fkc1wvc2l0ZXNcLzRcLzIwMTdcLzAzXC8wOC5qcGciLCJzbGlkZXNob3ciOiJkNDU4Yzg5In0%3D" href='../../app/uploads/sites/4/2017/03/41.jpeg'><img width="767" height="410" src="../../app/uploads/sites/4/2017/03/41-767x410.jpeg" class="attachment-ed-school-medium-alt size-ed-school-medium-alt" alt="" loading="lazy" srcset="../../app/uploads/sites/4/2017/03/41-767x410.jpeg 767w, ../../app/uploads/sites/4/2017/03/41-150x81.jpeg 150w" sizes="(max-width: 767px) 100vw, 767px"></a>
+			</dt></dl>
+			
+			
+			<dl class='gallery-item'>
+			<dt class='gallery-icon landscape'>
+				<a data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="d458c89" data-elementor-lightbox-title="42" e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjMsInVybCI6Imh0dHA6XC9cL2VkLmFpc2xpbnRoZW1lcy5jb21cL2FwcFwvdXBsb2Fkc1wvc2l0ZXNcLzRcLzIwMTdcLzAzXC8wNy5qcGciLCJzbGlkZXNob3ciOiJkNDU4Yzg5In0%3D" href='../../app/uploads/sites/4/2017/03/42.jpeg'><img width="767" height="410" src="../../app/uploads/sites/4/2017/03/42-767x410.jpeg" class="attachment-ed-school-medium-alt size-ed-school-medium-alt" alt="" loading="lazy" srcset="../../app/uploads/sites/4/2017/03/42-767x410.jpeg 767w, ../../app/uploads/sites/4/2017/03/42-150x81.jpeg 150w" sizes="(max-width: 767px) 100vw, 767px"></a>
+			</dt></dl>
+			
+			<!--<dl class='gallery-item'>	
+			<dt class='gallery-icon landscape'>
+				<a data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="d458c89" data-elementor-lightbox-title="06" e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjIsInVybCI6Imh0dHA6XC9cL2VkLmFpc2xpbnRoZW1lcy5jb21cL2FwcFwvdXBsb2Fkc1wvc2l0ZXNcLzRcLzIwMTdcLzAzXC8wNi5qcGciLCJzbGlkZXNob3ciOiJkNDU4Yzg5In0%3D" href='../../app/uploads/sites/4/2017/03/06.jpg'><img width="767" height="410" src="../../app/uploads/sites/4/2017/03/06-767x410.jpg" class="attachment-ed-school-medium-alt size-ed-school-medium-alt" alt="" loading="lazy" srcset="../../app/uploads/sites/4/2017/03/06-767x410.jpg 767w, ../../app/uploads/sites/4/2017/03/06-150x81.jpg 150w" sizes="(max-width: 767px) 100vw, 767px"></a>
+			</dt></dl>
+			
+			
+			<br style="clear: both">
+			
+			
+			<dl class='gallery-item'>	
+			<dt class='gallery-icon landscape'>
+				<a data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="d458c89" data-elementor-lightbox-title="05" e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjIsInVybCI6Imh0dHA6XC9cL2VkLmFpc2xpbnRoZW1lcy5jb21cL2FwcFwvdXBsb2Fkc1wvc2l0ZXNcLzRcLzIwMTdcLzAzXC8wNi5qcGciLCJzbGlkZXNob3ciOiJkNDU4Yzg5In0%3D" href='../../app/uploads/sites/4/2017/03/05.jpg'><img width="767" height="410" src="../../app/uploads/sites/4/2017/03/05-767x410.jpg" class="attachment-ed-school-medium-alt size-ed-school-medium-alt" alt="" loading="lazy" srcset="../../app/uploads/sites/4/2017/03/05-767x410.jpg 767w, ../../app/uploads/sites/4/2017/03/05-150x81.jpg 150w" sizes="(max-width: 767px) 100vw, 767px"></a>
+			</dt></dl>
+			
+			
+			<dl class='gallery-item'>
+			<dt class='gallery-icon landscape'>
+				<a data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="d458c89" data-elementor-lightbox-title="04" e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjUsInVybCI6Imh0dHA6XC9cL2VkLmFpc2xpbnRoZW1lcy5jb21cL2FwcFwvdXBsb2Fkc1wvc2l0ZXNcLzRcLzIwMTdcLzAzXC8wNC5qcGciLCJzbGlkZXNob3ciOiJkNDU4Yzg5In0%3D" href='../../app/uploads/sites/4/2017/03/04.jpg'><img width="767" height="410" src="../../app/uploads/sites/4/2017/03/04-767x410.jpg" class="attachment-ed-school-medium-alt size-ed-school-medium-alt" alt="" loading="lazy" srcset="../../app/uploads/sites/4/2017/03/04-767x410.jpg 767w, ../../app/uploads/sites/4/2017/03/04-150x81.jpg 150w" sizes="(max-width: 767px) 100vw, 767px"></a>
+			</dt></dl>
+			
+			<dl class='gallery-item'>
+			<dt class='gallery-icon landscape'>
+				<a data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="d458c89" data-elementor-lightbox-title="03" e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjYsInVybCI6Imh0dHA6XC9cL2VkLmFpc2xpbnRoZW1lcy5jb21cL2FwcFwvdXBsb2Fkc1wvc2l0ZXNcLzRcLzIwMTdcLzAzXC8wMy5wbmciLCJzbGlkZXNob3ciOiJkNDU4Yzg5In0%3D" href='../../app/uploads/sites/4/2017/03/03.jpg'><img width="767" height="410" src="../../app/uploads/sites/4/2017/03/03-767x410.jpg" class="attachment-ed-school-medium-alt size-ed-school-medium-alt" alt="" loading="lazy" srcset="../../app/uploads/sites/4/2017/03/03-767x410.jpg 767w, ../../app/uploads/sites/4/2017/03/03-150x81.jpg 150w" sizes="(max-width: 767px) 100vw, 767px"></a>
+			</dt></dl>
+			
+			
+			<br style="clear: both">
+			
+			
+			<dl class='gallery-item'>
+			<dt class='gallery-icon landscape'>
+				<a data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="d458c89" data-elementor-lightbox-title="02" e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjcsInVybCI6Imh0dHA6XC9cL2VkLmFpc2xpbnRoZW1lcy5jb21cL2FwcFwvdXBsb2Fkc1wvc2l0ZXNcLzRcLzIwMTdcLzAzXC8wMi5wbmciLCJzbGlkZXNob3ciOiJkNDU4Yzg5In0%3D" href='../../app/uploads/sites/4/2017/03/02.jpg'><img width="767" height="410" src="../../app/uploads/sites/4/2017/03/02-767x410.jpg" class="attachment-ed-school-medium-alt size-ed-school-medium-alt" alt="" loading="lazy" srcset="../../app/uploads/sites/4/2017/03/02-767x410.jpg 767w, ../../app/uploads/sites/4/2017/03/02-150x81.jpg 150w" sizes="(max-width: 767px) 100vw, 767px"></a>
+			</dt></dl>
+			
+			
+			<dl class='gallery-item'>
+			<dt class='gallery-icon landscape'>
+				<a data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="d458c89" data-elementor-lightbox-title="01" e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjgsInVybCI6Imh0dHA6XC9cL2VkLmFpc2xpbnRoZW1lcy5jb21cL2FwcFwvdXBsb2Fkc1wvc2l0ZXNcLzRcLzIwMTdcLzAzXC8wMS5wbmciLCJzbGlkZXNob3ciOiJkNDU4Yzg5In0%3D" href='../../app/uploads/sites/4/2017/03/01.jpg'><img width="767" height="410" src="../../app/uploads/sites/4/2017/03/01-767x410.jpg" class="attachment-ed-school-medium-alt size-ed-school-medium-alt" alt="" loading="lazy" srcset="../../app/uploads/sites/4/2017/03/01-767x410.jpg 767w, ../../app/uploads/sites/4/2017/03/01-150x81.jpg 150w" sizes="(max-width: 767px) 100vw, 767px"></a>
+			</dt></dl>
+			
+			<dl class='gallery-item'>
+			<dt class='gallery-icon landscape'>
+				<a data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="d458c89" data-elementor-lightbox-title="11" e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjIsInVybCI6Imh0dHA6XC9cL2VkLmFpc2xpbnRoZW1lcy5jb21cL2FwcFwvdXBsb2Fkc1wvc2l0ZXNcLzRcLzIwMTdcLzAzXC8wNi5qcGciLCJzbGlkZXNob3ciOiJkNDU4Yzg5In0%3D" href='../../app/uploads/sites/4/2017/03/11.JPG'><img width="767" height="410" src="../../app/uploads/sites/4/2017/03/11-767x410.JPG" class="attachment-ed-school-medium-alt size-ed-school-medium-alt" alt="" loading="lazy" srcset="../../app/uploads/sites/4/2017/03/11-767x410.JPG 767w, ../../app/uploads/sites/4/2017/03/11-150x81.JPG 150w" sizes="(max-width: 767px) 100vw, 767px"></a>
+			</dt></dl>
+			
+			<br style="clear: both">
+			
+			<dl class='gallery-item'>
+			<dt class='gallery-icon landscape'>
+				<a data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="d458c89" data-elementor-lightbox-title="22" e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjIsInVybCI6Imh0dHA6XC9cL2VkLmFpc2xpbnRoZW1lcy5jb21cL2FwcFwvdXBsb2Fkc1wvc2l0ZXNcLzRcLzIwMTdcLzAzXC8wNi5qcGciLCJzbGlkZXNob3ciOiJkNDU4Yzg5In0%3D" href='../../app/uploads/sites/4/2017/03/22.JPG'><img width="767" height="410" src="../../app/uploads/sites/4/2017/03/22-767x410.JPG" class="attachment-ed-school-medium-alt size-ed-school-medium-alt" alt="" loading="lazy" srcset="../../app/uploads/sites/4/2017/03/22-767x410.JPG 767w, ../../app/uploads/sites/4/2017/03/22-150x81.JPG 150w" sizes="(max-width: 767px) 100vw, 767px"></a>
+			</dt></dl>
+			
+			<dl class='gallery-item'>
+			<dt class='gallery-icon landscape'>
+				<a data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="d458c89" data-elementor-lightbox-title="33" e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjIsInVybCI6Imh0dHA6XC9cL2VkLmFpc2xpbnRoZW1lcy5jb21cL2FwcFwvdXBsb2Fkc1wvc2l0ZXNcLzRcLzIwMTdcLzAzXC8wNi5qcGciLCJzbGlkZXNob3ciOiJkNDU4Yzg5In0%3D" href='../../app/uploads/sites/4/2017/03/33.JPG'><img width="767" height="410" src="../../app/uploads/sites/4/2017/03/33-767x410.JPG" class="attachment-ed-school-medium-alt size-ed-school-medium-alt" alt="" loading="lazy" srcset="../../app/uploads/sites/4/2017/03/33-767x410.JPG 767w, ../../app/uploads/sites/4/2017/03/33-150x81.JPG 150w" sizes="(max-width: 767px) 100vw, 767px"></a>
+			</dt></dl>
+			
+			
+			<dl class='gallery-item'>
+			<dt class='gallery-icon landscape'>
+				<a data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="d458c89" data-elementor-lightbox-title="44" e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjIsInVybCI6Imh0dHA6XC9cL2VkLmFpc2xpbnRoZW1lcy5jb21cL2FwcFwvdXBsb2Fkc1wvc2l0ZXNcLzRcLzIwMTdcLzAzXC8wNi5qcGciLCJzbGlkZXNob3ciOiJkNDU4Yzg5In0%3D" href='../../app/uploads/sites/4/2017/03/44.JPG'><img width="767" height="410" src="../../app/uploads/sites/4/2017/03/44-767x410.JPG" class="attachment-ed-school-medium-alt size-ed-school-medium-alt" alt="" loading="lazy" srcset="../../app/uploads/sites/4/2017/03/44-767x410.JPG 767w, ../../app/uploads/sites/4/2017/03/44-150x81.JPG 150w" sizes="(max-width: 767px) 100vw, 767px"></a>
+			</dt></dl>
+			
+			<br style="clear: both">
+			
+			
+			<dl class='gallery-item'>
+			<dt class='gallery-icon landscape'>
+				<a data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="d458c89" data-elementor-lightbox-title="55" e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjIsInVybCI6Imh0dHA6XC9cL2VkLmFpc2xpbnRoZW1lcy5jb21cL2FwcFwvdXBsb2Fkc1wvc2l0ZXNcLzRcLzIwMTdcLzAzXC8wNi5qcGciLCJzbGlkZXNob3ciOiJkNDU4Yzg5In0%3D" href='../../app/uploads/sites/4/2017/03/55.JPG'><img width="767" height="410" src="../../app/uploads/sites/4/2017/03/55-767x410.JPG" class="attachment-ed-school-medium-alt size-ed-school-medium-alt" alt="" loading="lazy" srcset="../../app/uploads/sites/4/2017/03/55-767x410.JPG 767w, ../../app/uploads/sites/4/2017/03/55-150x81.JPG 150w" sizes="(max-width: 767px) 100vw, 767px"></a>
+			</dt></dl>
+			
+			<dl class='gallery-item'>
+			<dt class='gallery-icon landscape'>
+				<a data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="d458c89" data-elementor-lightbox-title="66" e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjIsInVybCI6Imh0dHA6XC9cL2VkLmFpc2xpbnRoZW1lcy5jb21cL2FwcFwvdXBsb2Fkc1wvc2l0ZXNcLzRcLzIwMTdcLzAzXC8wNi5qcGciLCJzbGlkZXNob3ciOiJkNDU4Yzg5In0%3D" href='../../app/uploads/sites/4/2017/03/66.JPG'><img width="767" height="410" src="../../app/uploads/sites/4/2017/03/66-767x410.JPG" class="attachment-ed-school-medium-alt size-ed-school-medium-alt" alt="" loading="lazy" srcset="../../app/uploads/sites/4/2017/03/66-767x410.JPG 767w, ../../app/uploads/sites/4/2017/03/66-150x81.JPG 150w" sizes="(max-width: 767px) 100vw, 767px"></a>
+			</dt></dl>
+			
+			
+			<dl class='gallery-item'>
+			<dt class='gallery-icon landscape'>
+				<a data-elementor-open-lightbox="yes" data-elementor-lightbox-slideshow="d458c89" data-elementor-lightbox-title="77" e-action-hash="#elementor-action%3Aaction%3Dlightbox%26settings%3DeyJpZCI6MjIsInVybCI6Imh0dHA6XC9cL2VkLmFpc2xpbnRoZW1lcy5jb21cL2FwcFwvdXBsb2Fkc1wvc2l0ZXNcLzRcLzIwMTdcLzAzXC8wNi5qcGciLCJzbGlkZXNob3ciOiJkNDU4Yzg5In0%3D" href='../../app/uploads/sites/4/2017/03/77.JPG'><img width="767" height="410" src="../../app/uploads/sites/4/2017/03/77-767x410.JPG" class="attachment-ed-school-medium-alt size-ed-school-medium-alt" alt="" loading="lazy" srcset="../../app/uploads/sites/4/2017/03/77-767x410.JPG 767w, ../../app/uploads/sites/4/2017/03/77-150x81.JPG 150w" sizes="(max-width: 767px) 100vw, 767px"></a>
+			</dt></dl>
+			<br style='clear: both'>
+ -->		</div>
+		</div>
+				</div>
+				</div>
+						</div>
+					</div>
+		</div>
+								</div>
+					</div>
+		</section>
 
 
 
 
-
-</section>	</div>
+</div>
 	</div>
 </div>
 

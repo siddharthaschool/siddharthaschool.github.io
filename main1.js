@@ -94,7 +94,7 @@ this.innerHTML=`
 </li>
 
 
-<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1748 msm-top-level-item"><a href="modern/academiccalender/index.htm">Events</a>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1748 msm-top-level-item"><a href="modern/events/index.htm">Events</a>
 <ul class="sub-menu">
 	<li class="menu-item menu-item-type-post_type_archive menu-item-object-tribe_events menu-item-2631"><a href="modern/previousevents/index.htm">Previous Events</a></li>
 </ul>
@@ -197,6 +197,11 @@ this.innerHTML=`
 		</div>
 </li>
 </ul>
+
+
+
+
+
 		
 
 	</header>
@@ -306,7 +311,7 @@ this.innerHTML=`
 
 
 <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1887 msm-top-level-item">
-<a href="modern/academiccalender/index.htm">Events</a>
+<a href="modern/events/index.htm">Events</a>
 <div class="respmenu-submenu-toggle cbp-respmenu-more"><i class="icon-edright-arrow"></i></div>
 
 <ul class="sub-menu">
