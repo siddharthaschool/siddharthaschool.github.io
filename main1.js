@@ -108,7 +108,7 @@ this.innerHTML=`
 		<div data-elementor-type="wp-post" data-elementor-id="1848" class="elementor elementor-1848">
 						<div class="elementor-inner">
 				<div class="elementor-section-wrap">
-									<section class="elementor-section elementor-top-section elementor-element elementor-element-f237c8f elementor-section-full_width elementor-section-height-default elementor-section-height-default" data-id="f237c8f" data-element_type="section">
+									<!--<section class="elementor-section elementor-top-section elementor-element elementor-element-f237c8f elementor-section-full_width elementor-section-height-default elementor-section-height-default" data-id="f237c8f" data-element_type="section">
 						<div class="elementor-container elementor-column-gap-default">
 							<div class="elementor-row">
 					<div class="elementor-column elementor-col-25 elementor-top-column elementor-element elementor-element-d184153" data-id="d184153" data-element_type="column" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
@@ -190,7 +190,7 @@ this.innerHTML=`
 		</div>
 								</div>
 					</div>
-		</section>
+		</section>-->
 									</div>
 			</div>
 					</div>
