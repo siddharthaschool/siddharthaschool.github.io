@@ -510,7 +510,290 @@ var msm_mega_submenu = {"data":{"submenu_items_position_relative":0,"mobile_menu
 <noscript><style> .wpb_animate_when_almost_visible { opacity: 1; }</style></noscript></head>
 <body class="home page-template page-template-template-home page-template-template-home-php page page-id-1530 wp-custom-logo tribe-no-js header-top page-title-enabled wpb-js-composer js-comp-ver-6.11.0 vc_responsive elementor-default elementor-kit-2689 elementor-page elementor-page-1530">
 
+<!-- ============================================================
+     PASTE THIS BLOCK right after the opening <body> tag
+     (just before the "<!-- mobile -->" comment)
+     ============================================================ -->
 
+<!-- ===== LIVE YOUTUBE POPUP ===== -->
+<style>
+  /* ---------- Marquee bar ---------- */
+  #yt-marquee-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999998;
+    background: linear-gradient(90deg, #c00 0%, #ff0000 40%, #c00 100%);
+    color: #fff;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    box-shadow: 0 -3px 12px rgba(0,0,0,0.35);
+    font-family: 'Montserrat', sans-serif;
+  }
+  #yt-marquee-bar .yt-label {
+    flex-shrink: 0;
+    background: #900;
+    padding: 0 18px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    gap: 7px;
+    border-right: 2px solid rgba(255,255,255,0.25);
+    cursor: pointer;
+    text-decoration: none;
+    color: #fff;
+  }
+  #yt-marquee-bar .yt-label svg { width:18px; height:18px; fill:#fff; flex-shrink:0; }
+  #yt-marquee-bar .marquee-track {
+    display: flex;
+    animation: marquee-scroll 28s linear infinite;
+    white-space: nowrap;
+  }
+  #yt-marquee-bar .marquee-track span {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 0 60px 0 0;
+    letter-spacing: 0.5px;
+  }
+  #yt-marquee-bar .marquee-track a {
+    color: #ffe082;
+    text-decoration: underline;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  @keyframes marquee-scroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ---------- Popup overlay ---------- */
+  #yt-popup-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999999;
+    background: rgba(0,0,0,0.72);
+    backdrop-filter: blur(4px);
+    align-items: center;
+    justify-content: center;
+    animation: fadeOverlay 0.3s ease;
+  }
+  #yt-popup-overlay.open { display: flex; }
+  @keyframes fadeOverlay { from { opacity:0; } to { opacity:1; } }
+
+  #yt-popup-box {
+    background: #fff;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.55);
+    width: min(92vw, 540px);
+    animation: popIn 0.35s cubic-bezier(.175,.885,.32,1.275);
+    font-family: 'Montserrat', sans-serif;
+  }
+  @keyframes popIn {
+    from { transform: scale(0.7); opacity:0; }
+    to   { transform: scale(1);   opacity:1; }
+  }
+  #yt-popup-header {
+    background: linear-gradient(135deg, #c00 0%, #ff1a1a 100%);
+    padding: 22px 24px 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: #fff;
+  }
+  #yt-popup-header svg { width:38px; height:38px; fill:#fff; flex-shrink:0; }
+  #yt-popup-header h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: 0.3px;
+  }
+  #yt-popup-header p {
+    margin: 4px 0 0;
+    font-size: 12px;
+    opacity: 0.88;
+    font-weight: 500;
+  }
+  #yt-popup-body {
+    padding: 28px 24px 24px;
+    text-align: center;
+  }
+  #yt-popup-body .yt-thumb {
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #111;
+    margin-bottom: 20px;
+    position: relative;
+    cursor: pointer;
+  }
+  #yt-popup-body .yt-thumb img {
+    width: 100%;
+    display: block;
+    opacity: 0.85;
+    transition: opacity 0.2s;
+  }
+  #yt-popup-body .yt-thumb:hover img { opacity: 1; }
+  #yt-popup-body .yt-thumb .play-btn {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+  }
+  #yt-popup-body .yt-thumb .play-btn svg {
+    width: 64px;
+    height: 64px;
+    filter: drop-shadow(0 4px 16px rgba(0,0,0,0.6));
+  }
+  #yt-popup-body h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 6px;
+  }
+  #yt-popup-body p {
+    font-size: 13px;
+    color: #555;
+    margin: 0 0 20px;
+    line-height: 1.5;
+  }
+  #yt-popup-body .yt-visit-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    background: #ff0000;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 13px 30px;
+    border-radius: 50px;
+    letter-spacing: 0.5px;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    box-shadow: 0 4px 18px rgba(255,0,0,0.35);
+  }
+  #yt-popup-body .yt-visit-btn:hover {
+    background: #cc0000;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 26px rgba(255,0,0,0.45);
+  }
+  #yt-popup-body .yt-visit-btn svg { width:20px; height:20px; fill:#fff; }
+  #yt-popup-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.22);
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    line-height: 32px;
+    text-align: center;
+    cursor: pointer;
+    transition: background 0.2s;
+    padding: 0;
+    z-index: 2;
+  }
+  #yt-popup-close:hover { background: rgba(255,255,255,0.4); }
+  #yt-popup-header { position: relative; }
+
+  /* Push page content above the marquee bar */
+  body { padding-bottom: 38px !important; }
+
+  /* Flash pulse on the marquee bar label */
+  @keyframes yt-pulse {
+    0%,100% { box-shadow: 0 0 0 0 rgba(255,0,0,0.7); }
+    50%      { box-shadow: 0 0 0 8px rgba(255,0,0,0); }
+  }
+  #yt-marquee-bar .yt-label { animation: yt-pulse 1.8s ease infinite; }
+</style>
+
+<!-- Marquee Bar (fixed bottom) -->
+<div id="yt-marquee-bar">
+  <a class="yt-label" id="yt-open-btn" href="javascript:void(0)" onclick="ytOpenPopup()">
+    <!-- YouTube icon -->
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
+    WATCH LIVE
+  </a>
+  <div class="marquee-track" id="yt-marquee-track">
+    <!-- doubled for seamless loop -->
+    <span>🎥 Siddhartha School is LIVE on YouTube! Watch our latest events, activities and school highlights &nbsp;|&nbsp; <a href="javascript:void(0)" onclick="ytOpenPopup()">Click here to watch now</a> &nbsp;|&nbsp; Subscribe to our channel for updates &nbsp;|&nbsp; 🏆 Admissions Open: PRE-KG to VIII Std. &nbsp;|&nbsp; 📞 Main Campus: 0416-290-7171 &nbsp;|&nbsp; City Campus: 0416-290-7272 &nbsp;|&nbsp;</span>
+    <span>🎥 Siddhartha School is LIVE on YouTube! Watch our latest events, activities and school highlights &nbsp;|&nbsp; <a href="javascript:void(0)" onclick="ytOpenPopup()">Click here to watch now</a> &nbsp;|&nbsp; Subscribe to our channel for updates &nbsp;|&nbsp; 🏆 Admissions Open: PRE-KG to VIII Std. &nbsp;|&nbsp; 📞 Main Campus: 0416-290-7171 &nbsp;|&nbsp; City Campus: 0416-290-7272 &nbsp;|&nbsp;</span>
+  </div>
+</div>
+
+<!-- YouTube Popup -->
+<div id="yt-popup-overlay" onclick="ytClosePopupOutside(event)">
+  <div id="yt-popup-box">
+    <div id="yt-popup-header">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
+      <div>
+        <h2>Siddhartha School — YouTube Channel</h2>
+        <p>Watch our events, activities &amp; school life highlights</p>
+      </div>
+      <button id="yt-popup-close" onclick="ytClosePopup()" title="Close">&#x2715;</button>
+    </div>
+    <div id="yt-popup-body">
+      <div class="yt-thumb" onclick="window.open('https://www.youtube.com/channel/UCkCdow8fB9WLcDik7p-gGkw','_blank')">
+        <img src="https://i.ytimg.com/vi/kEaRABCpXIY/maxresdefault.jpg" 
+             onerror="this.src='https://img.youtube.com/vi/kEaRABCpXIY/hqdefault.jpg'"
+             alt="Siddhartha School YouTube">
+        <div class="play-btn">
+          <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="40" cy="40" r="40" fill="rgba(0,0,0,0.55)"/>
+            <polygon points="32,24 60,40 32,56" fill="#fff"/>
+          </svg>
+        </div>
+      </div>
+      <h3>🏫 Growth for Service! Service for Growth!</h3>
+      <p>Stay connected with Siddhartha School. Subscribe to our YouTube channel for the latest events, annual day performances, sports day highlights and more.</p>
+      <a class="yt-visit-btn" href="https://www.youtube.com/channel/UCkCdow8fB9WLcDik7p-gGkw" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>
+        Visit Our YouTube Channel
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Auto-show popup after 2.5 seconds (once per session)
+  (function(){
+    if (!sessionStorage.getItem('ytPopupShown')) {
+      setTimeout(function(){ ytOpenPopup(); }, 2500);
+    }
+  })();
+
+  function ytOpenPopup() {
+    document.getElementById('yt-popup-overlay').classList.add('open');
+    sessionStorage.setItem('ytPopupShown', '1');
+  }
+  function ytClosePopup() {
+    document.getElementById('yt-popup-overlay').classList.remove('open');
+  }
+  function ytClosePopupOutside(e) {
+    if (e.target === document.getElementById('yt-popup-overlay')) ytClosePopup();
+  }
+  // Keyboard ESC to close
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') ytClosePopup();
+  });
+</script>
+<!-- ============================================================
+     END OF PASTE BLOCK
+     ============================================================ -->
 
 
 
